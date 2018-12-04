@@ -1,0 +1,352 @@
+https://global.gotomeeting.com/join/432742237
+//To do
+                                                1. Broker service error proper text and not generic text
+                                                2. Neuro-related correction for refresh cache functionality
+                                                3. Deployment procedures    
+        4. Documentation for neuro-graph release
+
+//Release management
+1. Create code drop Documentation
+2. git checkout staging
+3. git merge dev
+4. update the git repository from Visual Studio Code
+//cloud
+1. build the neuro-share-app
+2. upload binaries to /public/graph
+3. upload options.js, graph-config.js to assets
+
+//Budget
+Resource            : Hours :rates  :Actuals    :Diff   :$ diff
+On shore architect  : 16    :200    :0          :-16    :-3200
+Architect           : 244   :65     :284        :40     :2600
+Developer 1         : 240   :50     :232        :-8     :-400
+Developer 2 (UI)    : 92    :40     :68         :-24    :-960
+QA / BA             : 130   :38     :130        :0      :0
+                                                        -1960
+
+// 6 Weeks project started on 27th Aug 2018. End on 
+
+// Deliverables
+
+                                                    1. Setup mock api's
+
+                                                    Performance enhancements
+                                                    2. Spinning wait timer should not freeze during API calls. Should either continue spinning if API call is in progress
+                                                        , disappear if the API call times out, or disappear and show an error message if there was an error with the API call. 
+                                                        // provided httpTimeoutInMillis= 10000
+                                                    3. Eliminate duplicate API calls by using cached data within the same session.  
+                                                    4. There must be a user workaround to refresh the data within the same session
+
+                                                    Implement revised treatment panel
+                                                    5. Make the treatment panel bigger and easier to navigate for the purpose of understanding treatment history 
+                                                        of one or multiple medications. 
+
+                                                    Implement order symbol display logic
+                                                    6. If there are multiple orders for the same procedure and there is at least one completed order X days 
+                                                        after a null order, only show the completed orders. Otherwise, if none of the orders are completed 
+                                                            or if they are not within S days of one another, show all.
+                                                        
+                                                        Find out what is a null / incomplete / complete order.
+
+                                                  Edit configuration file 
+                                                          7. Add a list of labs to the “Labs” configuration file 
+                                                          8. Remove a list of medications from the “Other Meds” configuration file. 
+
+                                                          9. Implement display logic for Infusion medication 
+                                                              a) Determine if a medication is an infusion med based on the API response 
+                                                              b) In data layer 2, use a field from the API response as the “End”. 
+                                                                  If data field doesn’t exist, use a list to link medication names to effective duration. 
+                                                                  Use effective duration as the “End” 
+
+                                                  10. Change medication display logic
+                                                      a) Group medications by generic name regardless of generic/brand status, strength/dosage, or form
+                                                      b) If medications of different generic/brand status, strength/dosage, or form overlap, there must be a 
+                                                          visual differentiation
+                                                      c) In data layer 1, display the medicationOrders.medication.generic_name from the API response
+
+
+// Delivery schedule
+1st Week: 31st Aug 2018: 
+                                                Environment setup
+                                                Mock API(1)
+    Performance enhancements(2, 3, 4)
+    Implement revised treatment panel (5)
+    Edit configuration files (7, 8)
+
+2nd week: 7th October 2018
+    Implement order symbol display logic(6)
+    Implement display logic for Infusion medication (9)
+    Change medication display logic (10)
+
+
+Testing Data
+-------------
+
+Other Meds or Symptom Meds (Append the Json in medications-orders)
+---------------------------
+
+Note: This data is to test the filtration of Symptom Meds previously known as Other Meds based on the new logic.
+
+{
+            "discontinueReason": "",
+            "orderDesc": "NATALIZUMAB 300 MG/15ML IV CONC",
+            "associatedDiagnoses": [],
+            "frequency": "Q MONTH",
+            "orderIdentifier": "158246617",
+            "date": {
+              "orderDate": "07/30/2016",
+              "medStart": "08/01/2016",
+              "medEnded": "Yes",
+              "medEnd": "12/11/2016",
+              "lastDispense": "Past Week"
+            },
+            "contactSerialNumber": "976248959",
+            "dose": "300 mg",
+            "directions": "300 mg by Intravenous route every month.",
+            "medQuantity": "",
+            "name": "*RX COMMUNICATION - Testing",
+            "pendedOrder": "No",
+            "orderClass": {
+              "id": "7001",
+              "name": "Patient reported"
+            },
+            "discontinueUser": "",
+            "encounterConfirmationFlag": "Yes",
+            "orderMode": "Outpatient",
+            "medication": {
+              "id": "55839",
+              "pharmSubclass": {
+                "id": "6240",
+                "name": "Multiple Sclerosis Agents"
+              },
+              "therapeuticClass": {
+                "id": "1009",
+                "name": "Central Nervous System Drugs"
+              },
+              "simpleGenericName": [
+                "Test"
+              ],
+              "name": "*RX COMMUNICATION - Testing",
+              "pharmClass": {
+                "id": "62",
+                "name": "Misc. psychotherapeutic"
+              }
+            },
+            "discontinueInstant": "",
+            "dispenseQuantity": "",
+            "orderStatus": "ORDERED",
+            "lastContactType": "Ordered",
+            "refillRemain": "0",
+            "route": "Intravenous",
+            "refillCount": "",
+            "authorizingPhysician": {
+              "id": "30006338",
+              "title": "MD",
+              "name": "UNKNOWN, PROVIDER"
+            },
+            "displayName": "natalizumab (TYSABRI) 300mg/15ml Inj",
+            "notes": [
+              {
+                "noteText": [
+                  ">> HERRON, VERONICA   Tue Jun 27, 2017 10:17 AM",
+                  "Last infusion May 2017"
+                ],
+                "noteID": "2372439346"
+              },
+              {
+                "noteText": [
+                  ">> HERRON, VERONICA   Thu Sep 28, 2017 11:39 AM",
+                  "Monthly infusion. "
+                ],
+                "noteID": "2435533629"
+              }
+            ],
+            "sig": [
+              "300 mg by Intravenous route every month. &#8226; 300 mg EVERY MONTH &#8226; Patient reported &#8226; Until Discontinued"
+            ]
+          },
+
+	        {
+            "discontinueReason": "",
+            "orderDesc": "NATALIZUMAB 300 MG/15ML IV CONC",
+            "associatedDiagnoses": [],
+            "frequency": "Q MONTH",
+            "orderIdentifier": "158246617",
+            "date": {
+              "orderDate": "10/5/2016",
+              "medStart": "10/11/2016",
+              "medEnded": "Yes",
+              "medEnd": "12/11/2017",
+              "lastDispense": "Past Week"
+            },
+            "contactSerialNumber": "976248959",
+            "dose": "300 mg",
+            "directions": "300 mg by Intravenous route every month.",
+            "medQuantity": "",
+            "name": "NACL 0.9% Test 2",
+            "pendedOrder": "No",
+            "orderClass": {
+              "id": "7001",
+              "name": "Patient reported"
+            },
+            "discontinueUser": "",
+            "encounterConfirmationFlag": "Yes",
+            "orderMode": "Outpatient",
+            "medication": {
+              "id": "55839",
+              "pharmSubclass": {
+                "id": "6240",
+                "name": "Multiple Sclerosis Agents"
+              },
+              "therapeuticClass": {
+                "id": "1009",
+                "name": "Central Nervous System Drugs"
+              },
+              "simpleGenericName": [
+                "Test"
+              ],
+              "name": "NACL 0.9% Test 2",
+              "pharmClass": {
+                "id": "62",
+                "name": "Misc. psychotherapeutic"
+              }
+            },
+            "discontinueInstant": "",
+            "dispenseQuantity": "",
+            "orderStatus": "ORDERED",
+            "lastContactType": "Ordered",
+            "refillRemain": "0",
+            "route": "Intravenous",
+            "refillCount": "",
+            "authorizingPhysician": {
+              "id": "30006338",
+              "title": "MD",
+              "name": "UNKNOWN, PROVIDER"
+            },
+            "displayName": "natalizumab (TYSABRI) 300mg/15ml Inj",
+            "notes": [
+              {
+                "noteText": [
+                  ">> HERRON, VERONICA   Tue Jun 27, 2017 10:17 AM",
+                  "Last infusion May 2017"
+                ],
+                "noteID": "2372439346"
+              },
+              {
+                "noteText": [
+                  ">> HERRON, VERONICA   Thu Sep 28, 2017 11:39 AM",
+                  "Monthly infusion. "
+                ],
+                "noteID": "2435533629"
+              }
+            ],
+            "sig": [
+              "300 mg by Intravenous route every month. &#8226; 300 mg EVERY MONTH &#8226; Patient reported &#8226; Until Discontinued"
+            ]
+          }
+
+
+
+Imaging Test Data (Append the Json in imaging-orders)
+-----------------
+Note: - This data is to show that if there is a completed order of the same procedure within 60days of a null 
+order only the completed order is shown.
+
+                      {
+                        "authorizingProvider": "XYZ, ABC",
+                        "resultingLab": "",
+                        "orderID": "93434647567",
+                        "status": "",
+                        "orderType": "RAD MRI",
+                        "associatedDiagnosis": {
+                            "id": "116793",
+                            "description": "MS (multiple sclerosis) (HCC)",
+                            "codeSets": [
+                                {
+                                    "code": "ICD-9-CM",
+                                    "mappedCode": [
+                                        "340"
+                                    ]
+                                },
+                                {
+                                    "code": "ICD-10-CM",
+                                    "mappedCode": [
+                                        "G35"
+                                    ]
+                                }
+                            ]
+                        },
+                        "readingRadiologist": "XYZ, ABC",
+                        "impression": [],
+                        "narrative": [],
+                        "orderDate": "07/10/2018",
+                        "orderTime": "21:29:31",
+                        "contactSerialNumber": "963238576",
+                        "orderingProvider": "",
+                        "isAbnormal": "",
+                        "radStatusID": "",
+                        "procedureCPTCode": "M64170",
+                        "description": "MRI BRAIN WWO CONTRAST",
+                        "specimen": {
+                            "id": [],
+                            "applicationID": [],
+                            "takenDate": "",
+                            "takenTime": ""
+                        },
+                        "image_launch_url": "",
+                        "associatedAppointments": [],
+                        "displayName": "MRI Brain With and Without Contrast",
+                        "resultDate": "",
+                        "procedure": "MRI BRAIN WWO CONTRAST",
+                        "radStatusDescription": "",
+                        "resultTime": ""
+                    },
+                    {
+                        "authorizingProvider": "XYZ, ABC",
+                        "resultingLab": "",
+                        "orderID": "96563540",
+                        "status": "Completed",
+                        "orderType": "RAD MRI",
+                        "associatedDiagnosis": {
+                            "id": "116793",
+                            "description": "MS (multiple sclerosis) (HCC)",
+                            "codeSets": [
+                                {
+                                    "code": "ICD-9-CM",
+                                    "mappedCode": [
+                                        "340"
+                                    ]
+                                },
+                                {
+                                    "code": "ICD-10-CM",
+                                    "mappedCode": [
+                                        "G35"
+                                    ]
+                                }
+                            ]
+                        },
+                        "readingRadiologist": "XYZ, ABC",
+                        "impression": [],
+                        "narrative": [],
+                        "orderDate": "08/10/2018",
+                        "orderTime": "21:29:31",
+                        "contactSerialNumber": "963238576",
+                        "orderingProvider": "",
+                        "isAbnormal": "",
+                        "radStatusID": "",
+                        "procedureCPTCode": "M64170",
+                        "description": "MRI BRAIN WWO CONTRAST",
+                        "specimen": {
+                            "id": [],
+                            "applicationID": [],
+                            "takenDate": "",
+                            "takenTime": ""
+                        },
+                        "image_launch_url": "",
+                        "associatedAppointments": [],
+                        "displayName": "MRI Brain With and Without Contrast",
+                        "resultDate": "",
+                        "procedure": "MRI BRAIN WWO CONTRAST",
+                        "radStatusDescription": "",
+                        "resultTime": ""
+                    }

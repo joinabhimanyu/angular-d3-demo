@@ -1,0 +1,72 @@
+@import '~@angular/material/_theming';
+
+$black-87-opacity: rgba(black, 0.87);
+$white-87-opacity: rgba(white, 0.87);
+
+$primary: ( 50 : #e0ebef, 100 : #b3cdd8, 200 : #80acbe, 300 : #4d8aa4, 400 : #267191, 500 : #00587d, 600 : #005075, 700 : #00476a, 800 : #003d60, 900 : #002d4d, A100 : #80bfff, A200 : #4da5ff, A400 : #1a8bff, A700 : #017eff, contrast: ( 50 : #000000, 100 : #000000, 200 : #000000, 300 : #ffffff, 400 : #ffffff, 500 : #ffffff, 600 : #ffffff, 700 : #ffffff, 800 : #ffffff, 900 : #ffffff, A100 : #000000, A200 : #000000, A400 : #ffffff, A700 : #ffffff, ) );
+
+$accent: (
+  50: #E5E5E5,
+  100: #B5B2B3,
+  200: #A0A0A0,
+  300: #918E8F,
+  400: #7F7F82,
+  500: #6D6A6B,
+  600: #5C595A,
+  700: #4A4748,
+  800: #383536,
+  900: #383536,
+  A100: #262324,
+  A200: #141112,
+  A400: #020000,
+  A700: #000,  
+  contrast: (
+    50: $white-87-opacity,
+    100: $white-87-opacity,
+    200: $white-87-opacity,
+    300: $white-87-opacity,
+    400: $white-87-opacity,
+    500: $white-87-opacity,
+    600: $white-87-opacity,
+    700: $white-87-opacity,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $white-87-opacity,
+    A200: $white-87-opacity,
+    A400: $white-87-opacity,
+    A700: $white-87-opacity
+  )
+);
+
+$warn: (
+  50: #000304,
+  100: #00151d,
+  200: #002737,
+  300: #17355D,
+  400: #004a6a,
+  500: #005c83,
+  600: #0080b6,
+  700: #0092d0,
+  800: #00a4e9,
+  900: #548BD4,
+  A100: #0080b6,
+  A200: #006e9d,
+  A400: #005c83,
+  A700: #1dbbff,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: $black-87-opacity,
+    600: $black-87-opacity,
+    700: $black-87-opacity,
+    800: $black-87-opacity,
+    900: $black-87-opacity,
+    A100: $black-87-opacity,
+    A200: $black-87-opacity,
+    A400: $black-87-opacity,
+    A700: $black-87-opacity
+  )
+);

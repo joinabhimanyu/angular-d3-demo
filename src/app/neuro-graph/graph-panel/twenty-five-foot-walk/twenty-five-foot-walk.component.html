@@ -1,0 +1,151 @@
+<ng-template #walk25FeetSecondLevelTemplate>
+  <div class="modal-header draggable" (mousedown)="registerDrag($event)">
+    <h4 class="modal-title">25' Walk Test</h4>
+    <button type="button" class="close" aria-label="Close" (click)="dialogRef.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="walk25feet-container">
+      <div class="ns-walk25feet-subheader">Secs</div>
+      <div class="ns-row-walk25feet">
+        <div class="ns-walk25feet-col">25' Walk #1</div>
+        <div class="ns-walk25feet-value"> {{walk25FeetScoreDetail.walk_1_score}}
+        </div>
+      </div>
+      <div class="ns-row-walk25feet">
+        <div class="ns-walk25feet-col">25' Walk #2</div>
+        <div class="ns-walk25feet-value">{{walk25FeetScoreDetail.walk_2_score}}
+        </div>
+      </div>
+      <div class="ns-row-walk25feet">
+        <div class="ns-walk25feet-col">25' Walk Average</div>
+        <div class="ns-walk25feet-value">
+          {{walk25FeetScoreDetail.scoreValue}}
+        </div>
+      </div>
+      <div class="ns-row-walk25feet">
+        <div class="ns-walk25feet-col">Recorded</div>
+        <div class="ns-walk25feet-value">{{walk25FeetScoreDetail.recordedDate}}</div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #walk25FeetEditSecondLevelTemplate>
+  <div class="modal-header draggable" (mousedown)="registerDrag($event)">
+    <h4 class="modal-title">25' Walk Test</h4>
+    <button type="button" class="close" aria-label="Close" (click)="dialogRef.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="walk25feet-container">
+      <div class="ns-walk25feet-subheader">Secs</div>
+      <div class="ns-row-walk25feet">
+        <div class="ns-walk25feet-col">25' Walk #1</div>
+
+        <md-input-container class="ns-walk25feet-input">
+          <input mdInput type="number" min="0" max="300" step="any" (keypress)="omit_special_char($event)" [(ngModel)]="walk25FeetScoreDetail.walk_1_score" (change)="updateWalk('Update')"  />        
+
+        </md-input-container>
+        <md-error class="ng-error" *ngIf=" walk25FeetScoreDetail.walk_1_score < 0 || walk25FeetScoreDetail.walk_1_score > 300">
+          Invalid [Data Type, Range, or Value]. Please enter valid [Data Type, Range, or Value]
+        </md-error>
+      </div>
+      <div class="ns-row-walk25feet">
+        <div class="ns-walk25feet-col">25' Walk #2</div>
+
+        <md-input-container class="ns-walk25feet-input">
+          <input mdInput type="number" min="0" max="300" step="any" (keypress)="omit_special_char($event)" [(ngModel)]="walk25FeetScoreDetail.walk_2_score" (change)="updateWalk('Update')" />           
+        </md-input-container>
+        <md-error class="ng-error" *ngIf=" walk25FeetScoreDetail.walk_2_score < 0 || walk25FeetScoreDetail.walk_2_score > 300">
+          Invalid [Data Type, Range, or Value]. Please enter valid [Data Type, Range, or Value]
+        </md-error>
+      </div>
+      <div class="ns-row-walk25feet">
+        <div class="ns-walk25feet-col">25' Walk Average</div>
+        <div class="ns-walk25feet-value">
+          <span [(ngModel)]="walk25FeetScoreDetail.scoreValue" ngDefaultControl> {{walk25FeetScoreDetail.scoreValue}}</span>
+        </div>
+      </div>
+      <div class="ns-row-walk25feet">
+        <div class="ns-walk25feet-col">Recorded</div>
+        <div class="ns-walk25feet-value">{{walk25FeetScoreDetail.recordedDate}}</div>
+      </div>
+      <div class="ns-row-walk25feet" *ngIf="showUpdate == true">
+        <div class="ns-walk25feet-update">
+          <button class="call-out-buttons" (click)="saveWalk25FeetScore('Update')">Update</button>          
+        </div>
+        <md-error class="ng-error" *ngIf=" scoreNotValidate == true">
+          Please enter at least 1 walk value 
+        </md-error> 
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #walk25FeetAddSecondLevelTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title">25' Walk Test</h4>
+    <button type="button" class="btn-info-walk25feet" (click)="walk25FeetInfo();">
+      <span>i</span>
+    </button>
+    <button type="button" class="close" aria-label="Close" (click)="Walk25FeetChartDialogRef.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="walk25feet-container">
+      <div class="ns-walk25feet-subheader">Secs</div>
+      <div class="ns-row-walk25feet">
+        <div class="ns-walk25feet-col">25' Walk #1</div>
+        <md-input-container class="ns-walk25feet-input">
+          <input mdInput type="number" min="0" max="300" step="any" (keypress)="omit_special_char($event)" [(ngModel)]="score_1" (change)="updateWalk('Add')" />          
+        </md-input-container>
+
+        <md-error class="ng-error" *ngIf="score_1 < 0 || score_1 > 300">
+          Invalid [Data Type, Range, or Value]. Please enter valid [Data Type, Range, or Value]
+        </md-error>        
+      </div>
+      <div class="ns-row-walk25feet">
+        <div class="ns-walk25feet-col">25' Walk #2</div>
+        <md-input-container class="ns-walk25feet-input">
+          <input mdInput type="number" min="0" max="300" step="any" (keypress)="omit_special_char($event)" [(ngModel)]="score_2" (change)="updateWalk('Add')" />          
+        </md-input-container>
+        <md-error class="ng-error" *ngIf=" score_2 < 0 || score_2 > 300">
+          Invalid [Data Type, Range, or Value]. Please enter valid [Data Type, Range, or Value]
+        </md-error>
+      </div>
+      <div class="ns-row-walk25feet">
+        <div class="ns-walk25feet-col">25' Walk Average</div>
+        <div class="ns-walk25feet-value">
+          <span [(ngModel)]="scoreValue" ngDefaultControl> {{scoreValue}}</span>
+        </div>
+      </div>
+      <div class="ns-row-walk25feet">
+        <div class="ns-walk25feet-update">
+          
+          <button class="call-out-buttons" (click)="saveWalk25FeetScore('Add')" >Add</button> 
+        </div>
+        <md-error class="ng-error" *ngIf=" scoreNotValidate == true">
+          Please enter at least 1 walk value 
+        </md-error> 
+        <md-error class="ng-error" *ngIf=" scoreNotValidate != true && scoreNotSamedate == true">
+          Cannot add 2 different  25' Walk values on the same day 
+        </md-error> 
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #walk25FeetThirdLevelTemplate>
+  <div class="walk25feet-info-popup">
+    <div class="modal-header walk25feet-header">
+      <div class="walk25feet-header-title">{{walk25FeetDataInfo.title}}</div>
+      <button type="button" class="close marginTop" aria-label="Close" (click)="reportDialogRef.close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="walk25feet-popup-content" *ngFor="let walk25feet of walk25FeetDataInfo.info;">
+      {{walk25feet}}
+    </div>
+  </div>
+</ng-template>

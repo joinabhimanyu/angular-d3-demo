@@ -1,0 +1,103 @@
+<div class="header-area">
+  <span class="header-text">MS Related Care</span>
+</div>
+<div class="cds-panel">
+  <div class="cds-items">
+    <div class="cds-items-checkbox">
+      <md-checkbox (change)='changed($event,"review_relapses")' [disabled]="!isEnable" [(ngModel)]='cdsState.review_relapses.checked'>Review
+        relapses</md-checkbox>
+    </div>
+    <div class="cds-items-info">
+      <span class="custom-i" (click)="openDialog($event,'review_relapses')">i</span>
+    </div>
+  </div>
+
+  <div class="cds-items">
+    <div class="cds-items-checkbox">
+      <md-checkbox (change)='changed($event,"review_mri_images")' [disabled]="!isEnable" [(ngModel)]='cdsState.review_mri_images.checked'>Review
+        MRI images</md-checkbox>
+    </div>
+
+    <div class="cds-items-info">
+      <span class="custom-i" (click)="openDialog($event,'review_mri_images')">i</span>
+    </div>
+  </div>
+
+  <div class="cds-items">
+    <div class="cds-items-checkbox">
+      <md-checkbox (change)='changed($event,"review_symptom_status")' [disabled]="!isEnable" [(ngModel)]='cdsState.review_symptom_status.checked'>
+        Review symptom status </md-checkbox>
+    </div>
+    <div class="cds-items-info">
+      <span class="custom-i" (click)="openDialog($event,'review_symptom_status')">i</span>
+    </div>
+  </div>
+
+
+  <div class="cds-items">
+    <div class="cds-items-checkbox">
+      <md-checkbox (change)='changed($event,"review_ms_type_status")' [disabled]="!isEnable" [(ngModel)]='cdsState.review_ms_type_status.checked'>
+        Review MS type/status </md-checkbox>
+    </div>
+
+    <div class="cds-items-info">
+      <span class="custom-i" (click)="openDialog($event,'review_ms_type_status')">i</span>
+    </div>
+  </div>
+
+  <div class="cds-items">
+    <div class="cds-items-checkbox">
+      <md-checkbox (change)='changed($event,"review_dmts")' [disabled]="!isEnable" [(ngModel)]='cdsState.review_dmts.checked'>
+        Review DMTs </md-checkbox>
+    </div>
+
+    <div class="cds-items-info">
+      <span class="custom-i" (click)="openDialog($event,'review_dmts')">i</span>
+    </div>
+  </div>
+  <div class="cds-items">
+    <div class="cds-items-checkbox">
+      <md-checkbox (change)='changed($event,"review_monitoring_labs")' [disabled]="!isEnable" [(ngModel)]='cdsState.review_monitoring_labs.checked'>
+        Review monitoring labs </md-checkbox>
+    </div>
+    <div class="cds-items-info">
+      <span class="custom-i" (click)="openDialog($event,'review_monitoring_labs')">i</span>
+    </div>
+  </div>
+  <div class="cds-items">
+    <div class="cds-items-checkbox">
+      <md-checkbox (change)='changed($event,"review_vitamin_d")' [disabled]="!isEnable" [(ngModel)]='cdsState.review_vitamin_d.checked'>
+        Review Vitamin D </md-checkbox>
+    </div>
+    <div class="cds-items-info">
+      <span class="custom-i" (click)="openDialog($event,'review_vitamin_d')">i</span>
+    </div>
+  </div>
+  <div class="cds-items">
+    <div class="cds-items-checkbox">
+      <md-checkbox (change)='changed($event,"review_other_meds")' [disabled]="!isEnable" [(ngModel)]='cdsState.review_other_meds.checked'>
+        Review other related meds </md-checkbox>
+    </div>
+    <div class="cds-items-info">
+      <span class="custom-i" (click)="openDialog($event,'review_other_meds')">i</span>
+    </div>
+  </div>
+  <div class="cds-items">
+    <div class="cds-items-checkbox">
+      <md-checkbox (change)='changed($event,"review_symptoms_referrals")' [disabled]="!isEnable" [(ngModel)]='cdsState.review_symptoms_referrals.checked'>
+        Review symptoms referrals </md-checkbox>
+    </div>
+    <div class="cds-items-info">
+      <span class="custom-i" (click)="openDialog($event,'review_symptoms_referrals')">i</span>
+    </div>
+  </div>
+  <div class="cds-items" style="display:none;">
+    <div class="cds-items-checkbox">
+      <md-checkbox (change)='changed($event,"review_vaccinations")' [disabled]="!isEnable" [(ngModel)]='cdsState.review_vaccinations.checked'>
+        Review vaccinations </md-checkbox>
+    </div>
+    <div class="cds-items-info">
+      <span class="custom-i" (click)="openDialog($event,'review_vaccinations')">i</span>
+    </div>
+  </div>
+</div>

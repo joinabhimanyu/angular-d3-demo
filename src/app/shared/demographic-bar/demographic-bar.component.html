@@ -1,0 +1,100 @@
+<md-toolbar class="md-toolbar" color="primary" layout="row" layout-align="center center">
+    <button (click)="test()">Test</button>
+    <app-version [appConfig]="appConfig"></app-version>
+    <div class="flex-container demographic-data" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around center" fxLayoutAlign.xs="start"
+        fxFlex="100%">
+        <div>
+            <div class="title">Patient</div>
+            <div class="bold truncate" *ngIf="data.name" mdTooltip="{{patientName}}">{{patientName}}</div>
+        </div>
+        <div>
+            <div class="title">Sex</div>
+            <div class="bold">{{data.sex}}</div>
+        </div>
+        <div>
+            <div class="title">Age</div>
+            <div class="bold">{{age}}</div>
+        </div>
+        <div>
+            <div class="title">Marital Status</div>
+            <div class="bold">{{data.maritalStatus}}</div>
+        </div>
+        <div>
+            <div class="title">Insurance</div>
+            <div class="bold truncate" mdTooltip="{{data.insurance}}">{{data.insurance}}</div>
+        </div>
+        <div>
+            <div class="title">Age of Onset</div>
+            <md-input-container mdTooltip="{{ageOfOnsetTooltip}}">
+                <input aclRoleDisabled [rolePermission]="'!provider'" class="age-onset pointer" mdInput type="number" max="99" min="0" (keypress)="isValidKey($event)"
+                    [(ngModel)]="activity.age_of_onset" (change)="updateActivity('age_of_onset_last_updated_instant', false)" [disabled]='encunterClosed'
+                    evalEvent [evalData]="{
+                            label:'Age of Onset',
+                            data: activity.age,
+                            type: 'button'
+                            }" />
+            </md-input-container>
+        </div>
+
+        <div>
+            <div class="title select">MS Type</div>
+            <md-select [disabled]="typesArray[0].disabled" aclRoleDisabled [rolePermission]="'!provider'" (onElementDisabled)="typesArray[0].disabled = true"
+                [(ngModel)]="activity.ms_type" (change)="updateActivity('ms_type_last_updated_instant', false)" mdTooltip="{{msTypeTooltip}}"
+                [mdTooltipClass]="'ms-type-tooltip'">
+                <md-option *ngFor="let type of typesArray" [value]="type.name" evalEvent [evalData]="{
+                            label:'MS Type',
+                            data: type.name,
+                            type: 'button'
+                            }">
+                    {{ type.name }}
+                </md-option>
+            </md-select>
+        </div>
+        <div class="status">
+            <div class="title select">MS Status
+                <span class="fa-stack info-icon pointer" (click)="toggleTooltip()">
+                    <i class="fa fa-circle-thin fa-stack-2x"></i>
+                    <i class="fa fa-info fa-stack-1x"></i>
+                </span>
+                <div class="info-tooltip" [ngClass]="{'show' : showTooltip}">
+                    <div>
+                        <h1>{{msStatus.title}}</h1>
+                        <i class="material-icons" (click)="toggleTooltip()">clear</i>
+                    </div>
+                    <p>
+                        {{msText}}
+                        <a href="{{msStatus.learn_more}}" target="_blank">Learn More</a>
+                    </p>
+                </div>
+            </div>
+            <md-select [disabled]="statusDisease[0].disabled" aclRoleDisabled [rolePermission]="'!provider'" (onElementDisabled)="statusDisease[0].disabled = true"
+                [(ngModel)]="activity.ms_status_1" (change)="updateActivity('ms_status_1_last_updated_instant', false)" mdTooltip="{{msStatus1Tooltip}}">
+                <md-option *ngFor="let status of statusDisease" [value]="status.name" evalEvent [evalData]="{
+                                label:'MS Status (1)',
+                                data: status.name,
+                                type: 'button'
+                                }">
+                    {{ status.name }}
+                </md-option>
+            </md-select>
+            <md-select [disabled]="statusType[0].disabled" aclRoleDisabled [rolePermission]="'!provider'" (onElementDisabled)="statusType[0].disabled = true"
+                [(ngModel)]="activity.ms_status_2" (change)="updateActivity('ms_status_2_last_updated_instant', false)" mdTooltip="{{msStatus2Tooltip}}">
+                <md-option *ngFor="let status of statusType" [value]="status.name" evalEvent [evalData]="{
+                                label:'MS Status (2)',
+                                data: status.name,
+                                type: 'button'
+                                }">
+                    {{ status.name }}
+                </md-option>
+            </md-select>
+        </div>
+        <div>
+            <div class="title">Last Visit with Me</div>
+            <div class="bold truncate" *ngIf="lastAppointmentWhitMe">{{lastAppointmentWhitMe.date}}</div>
+            <div class="bold truncate" *ngIf="!lastAppointmentWhitMe">-</div>
+        </div>
+    </div>
+    <span class="filler"></span>
+    <app-user-data-bar class="user-data" [userObject]="userObject" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="right center"
+        fxLayoutAlign.xs="end"></app-user-data-bar>
+</md-toolbar>

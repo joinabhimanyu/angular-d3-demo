@@ -1,0 +1,29 @@
+.info-panel {
+  .title {
+    width: 100%;
+    background: $light-warn-color;
+    color: $white;
+    height: 36px;
+    font-size: 14px;
+    line-height: 36px;
+    text-indent: 10px;
+    font-weight: bold;
+    border: 1px $warn-color solid;
+    &.dark {
+      border: 1px $light-warn-color solid;
+      background: $warn-color;
+    }
+    i {
+      float: right;
+      margin-top: 3px;
+      font-size: 1.5em;
+      margin-right: 10px;
+      clear: right;
+    }
+  }
+  .primary-color {
+    color: $primary-color;
+  }
+
+
+}

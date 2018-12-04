@@ -1,0 +1,8 @@
+@import "../common.scss";
+
+.related-add-today-label{ width: 25px; float: right; text-align:center; font-size:8pt; color: #AAAAAA; font-weight:normal;}
+.related-add-today:after{
+    clear: both;
+    content: '';
+    display:block;
+}

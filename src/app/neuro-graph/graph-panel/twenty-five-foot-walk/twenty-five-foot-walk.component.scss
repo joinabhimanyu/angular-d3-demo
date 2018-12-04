@@ -1,0 +1,122 @@
+$walk25feet-color:#31859b;
+
+.btn-info-walk25feet
+{
+    width: 15px; 
+    height: 15px; 
+    padding: 2px;
+    text-align:center;
+    font-weight: 700;
+    margin-left: 8px;
+    font-size: 8pt;
+    line-height: 8pt;
+    color: #333333; 
+    border: solid 1px $walk25feet-color; 
+    background-color: #ffffff;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    outline: none;  
+    float: left;
+    margin-top: 2px;
+    &:not([disabled]):hover {
+        border: solid 1px $walk25feet-color; 
+        background: #ffffff!important;
+        -webkit-box-shadow: 2px 2px 2px 1px #9c9c9c;
+        box-shadow: 2px 2px 2px 1px #9c9c9c;
+        color: #333333; 
+    }
+}
+.ng-error
+{
+    color:red !important;
+    font-style: italic;
+}
+
+.walk25feet-header{
+    border-bottom: 1px solid #bfbfbf;
+    padding: 7px 15px 5px 15px;
+    height: 38px;
+    line-height: 38px;
+    font-weight: 700;
+    color: #7e7e7e;
+    font-size: 14pt;
+}
+.walk25feet-header-title{ float: left;}
+.walk25feet-header-close{ float: right;}
+.walk25feet-header-close i{ font-size: 10pt; cursor: pointer;}
+.walk25feet-header:after{
+    clear: both;
+    content: '';
+    display: block;
+}
+.walk25feet-popup-content {
+    padding: 10px 15px 15px 15px;
+    font-size: 10pt;
+}
+
+.walk25feet-container{
+    padding: 10px;
+    .ns-row-walk25feet{ margin-bottom: 5px;}
+    .ns-walk25feet-col{ width: 65%; float: left; text-align: left;}
+    .ns-walk25feet-value{ 
+        width:33%; 
+        float: right;   
+        text-align:right;
+        font-weight: bold;
+    }
+    .ns-walk25feet-input{
+        float: right;
+        width: 33%;
+        text-align: right;
+        background-color: #d8d8d8; 
+        height: 20px;
+    }
+    .ns-row-walk25feet:after{
+        clear: both;
+        content: '';
+        display: block;
+    }
+    .ns-walk25feet-update{ float: right;}
+    input.mat-input-element{
+        margin-bottom: 14px;
+        padding-top: 3px;
+        text-align: right;
+    }
+    .ns-walk25feet-subheader{
+      font-weight: bold;
+      text-align: right
+    }
+
+    .ns-input-container
+    {
+        display: inline !important;
+        background-color: #d8d8d8;
+
+    } 
+    .mat-form-field-infix {
+        height: 20px;
+        margin-top: -10px;
+        padding: 0px;
+    }
+    .mat-form-field-wrapper{
+        padding-bottom: 6px;
+    }
+}
+
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+    opacity: 0;
+}
+.marginTop
+{
+    margin-top: 12px;
+}
+.ns-field-set
+{
+    border:none;
+    padding: 0px;
+}

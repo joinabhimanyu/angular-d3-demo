@@ -1,0 +1,136 @@
+$ns-labs-green:#9dbb61; 
+$ns-labs-grey:#bfbfbf;
+$ns-labs-red:#e53935;
+
+@mixin vertical-align($position: relative) {
+    position: $position;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+
+.labs-container{ padding: 10px;}
+.ns-labs-header{ padding: 5px 0px; font-size: 13pt; margin-bottom: 15px;}
+.ns-labs-header:after{
+    clear: both;
+    content: '';
+    display: block; 
+}
+.ns-labs-ordered { float: left; width:348px; margin-left: 40px;}
+.ns-labs-trend { float: left; width: 105px;padding-left: 15px;}
+.ns-labs-range { float: left; width: 120px;}
+.ns-labs-row{ margin-bottom: 5px;}
+.ns-labs-row:after{
+    clear: both;
+    content: '';
+    display: block;   
+}
+.ns-small-bar{
+    width: 6px;
+    margin-right: 5px;
+    height: 40px;
+    float: left;
+}
+.ns-small-box{
+    width: 30px;
+    margin-right: 5px;
+    height: 30px;
+    float: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 30px;
+    text-align:center;
+    padding: 5px;
+    }     
+.ns-small-box-text{
+        width: 155px;
+        margin-right: 5px;
+        height: 30px;
+        float: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 30px;
+        text-align:left;
+        padding: 5px;
+        color:#7e7e7e;
+}  
+
+.ns-labs-icon-plus{float: left; width: 25px; text-align: center; height: 40px; margin-left: 18px;cursor:pointer;}
+.ns-labs-icon-plus i{font-size: 10pt; color: #7e7e7e; margin-top: 12px;}
+.ns-labs-icon-minus{float: left; width: 25px; text-align: center; height: 40px; margin-left: 18px;cursor:pointer;}
+.ns-labs-icon-minus i{font-size: 10pt; color: #7e7e7e; margin-top: 12px;}
+
+.ns-order-labs-box{ 
+    background-color: #ececec; 
+    float: left; margin-right: 5px; width: 270px; height: 30px; padding: 5px;
+    .ns-labs-name{
+        font-size:10pt;
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .ns-labs-resultDate, .ns-labs-orderDate{
+        font-size: 8pt;
+        padding-top: 2px;
+    }
+}
+
+.ns-labs-trend-box{ float: left; width: 125px; height: 40px; display: block;line-height: 30px;}
+.ns-labs-trend-box-null{display: none;}
+
+.ns-labs-range-unit{ float: left; height: 40px; }
+.ns-range-value{width: 90px; margin-right: 5px; line-height: 30px; color: #7e7e7e; font-weight: bold; text-align:center; display: inline-block; padding: 5px; background-color: #ececec; height: 30px;}
+.ns-range-unit{ display: inline-block; padding: 5px; line-height: 30px;width:50px;}
+.ns-range-value-nogrey{width: 90px; margin-right: 5px; line-height: 30px; font-weight: bold; text-align:center; display: inline-block; padding: 5px; height: 30px;}
+.ns-no-range{width: 90px; margin-right: 5px; line-height: 30px; color: #7e7e7e; font-weight: bold; text-align:center; display: inline-block; padding: 5px; height: 30px;}
+.ns-labs-white{
+    background-color: #ffffff;
+    color: #ffffff;
+    font-weight: bold;}
+.ns-labs-red{
+    background-color: $ns-labs-red;
+    color: #ffffff;
+    font-weight: bold;}
+.ns-labs-grey{ 
+    background-color: $ns-labs-grey;
+    color: #ffffff;
+    font-weight: bold;}
+.ns-labs-green{
+    background-color: $ns-labs-green;
+    color: #ffffff;
+    font-weight: bold;}
+.ns-labs-items-container{
+    height: 400px; overflow: auto;
+}
+
+.ns-sub-labs-items{
+    margin-left: 63px;
+    .ns-order-labs-box{ 
+        width: 250px;
+    }
+}
+.ns-labs-null{
+    display: block;
+}
+.show
+{
+    display:block;
+}
+.hide
+{
+    display:none;
+}
+.ns-labs-plus-icon {
+    display: block;
+    cursor: pointer;
+    width: 10px;
+    height: 10px;
+    float: right;
+    margin-top: 12px;
+    margin-right:5px;
+    font-size:11pt;
+}

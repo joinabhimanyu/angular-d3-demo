@@ -1,0 +1,412 @@
+<div class="header-area">
+  <div class="edss-caseload" *ngIf="isEdssSelected">
+    <button md-button *ngIf="!virtualCaseloadEnabled" class="virtual-buttons" (click)="toggleEdssVirtualCaseload()">Add
+      EDSS Virtual Caseload</button>
+    <button md-button *ngIf="virtualCaseloadEnabled" class="virtual-buttons" (click)="toggleEdssVirtualCaseload()">Remove
+      EDSS Virtual Caseload</button>
+  </div>
+  <div class="btn-info" (click)="showVirtualCaseloadInfo($event)" *ngIf="isEdssSelected">
+    <span>i</span>
+  </div>
+  <div class="right-float">
+  </div>
+</div>
+<div id="graph-panel-wrapper">
+  <div id="graph-container" style="position:relative;">
+    <svg width="100%" [style.height.px]="graphSetting.panel.offsetHeight" style="overflow: hidden;">
+      <g app-shared-grid [chartState]="state" id="shared-grid"></g>
+      <g app-labs [chartState]="state" id="labs"></g>
+      <g app-imaging [chartState]="state" id="imaging"></g>
+      <g app-symptoms [chartState]="state" id="symptoms"></g>
+      <g app-relapses [chartState]="state" id="relapses"></g>
+      <g app-edss [chartState]="state" id="edss"></g>
+      <g app-twenty-five-foot-walk [chartState]="state" id="walk25feet"></g>
+    </svg>
+    <div class="loader" [class.loader-hidden]="brokerService.isHide">
+      <div class="loader-overlay">
+        <div class="ns-dmt-theme">
+          <md-progress-spinner mode="indeterminate"></md-progress-spinner>
+        </div>
+      </div>
+    </div>
+    <div app-medications [chartState]="state" id="medications-container" [style.top.px]="medicationTopPos"
+      [style.height.px]="medicationHeight" (enlargeMedicationParent)="enlargeMedicationPanel()" style="position:absolute;width:100%;overflow-y:auto;overflow-x:hidden;background-color:#FFF;border:1px solid #E7E7E7;padding-top:5px;">
+    </div>
+  </div>
+  <div id="graph-control">
+    <div id="undo" class="control-button" (click)="onResetZoom()">
+      <svg x="0px" y="0px" viewBox="0 0 40 40" style="enable-background:new 0 0 40 40;" xml:space="preserve">
+        <path class="st0" d="M10.9,19c-2.1,0-4.3,0-6.4,0c-1.9,0-2.8-1-2.4-2.9c1-4.3,2-8.6,3-13c0.2-0.8,0.5-1.3,1.4-1.5
+               c0.8-0.2,1.3,0.2,1.7,0.7c0.7,0.9,1.5,1.8,2.2,2.8c0.7,1,1.2,1.1,2.3,0.5C23.1,0.1,36,6,38.6,17.6c1.6,7.4-1.8,15.4-8.2,19.1
+               c-6.8,3.9-15.5,3.1-21.1-2c-1.5-1.4-1.5-1.4-0.1-2.8c1-1,2-1.9,2.9-2.9c0.8-0.9,1.3-0.8,2.2,0c3.9,3.6,9.3,3.8,13.4,0.5
+               c3.3-2.6,4.6-6.1,3.7-10.3c-1-4.3-3.8-7-8.1-8c-2.1-0.5-4-0.2-6,0.6c-0.8,0.3-1,0.8-0.4,1.5c0.8,0.9,1.5,1.9,2.2,2.8
+               c0.5,0.6,0.7,1.2,0.3,2c-0.4,0.7-1,0.9-1.7,0.9C15.4,19,13.2,19,10.9,19C10.9,19,10.9,19,10.9,19z" />
+      </svg>
+    </div>
+
+    <div id="zoom" class="control-button" [md-menu-trigger-for]="zoomMenu">
+      <span class="control-button">
+        <svg version="1.1" id="icon-zoom" x="0px" y="0px" viewBox="0 0 40 40" style="enable-background:new 0 0 40 40;"
+          xml:space="preserve">
+          <style type="text/css">
+            .iconzoom {
+              fill: #bfbfbf;
+            }
+          </style>
+          <g>
+            <path class="iconzoom" d="M38,34.2c-1.8-2.4-3.8-4.5-6.1-6.3c-1.6-1.3-2.1-2.2-0.9-4.1c1.3-2.1,1.8-4.5,1.7-6.8c0-8.3-5.8-15-13.5-15.9
+                   C10.8,0.2,3.1,5.6,1.7,13.6c-1.1,6,0.7,11.1,5.4,15c4.7,3.9,10.1,4.6,15.7,2.5c2.1-0.8,3.2-0.6,4.6,1.2c1.8,2.3,4.1,4.2,6.3,6.2
+                   c1.3,1.2,2.9,1.8,4.4,0.2C39.5,37.2,39.1,35.7,38,34.2z M17.2,26.8c-5.7,0-10.5-4.5-10.5-10.1c0-5.7,4.8-10.5,10.5-10.5
+                   c5.4,0,10,4.6,10.1,10.2C27.4,22.2,22.9,26.8,17.2,26.8z" />
+            <path class="iconzoom" d="M21.9,14.6c-2-0.1-2.8-1.1-2.9-2.9c-0.1-1.1-0.8-1.8-1.9-1.8c-1.2,0.1-1.9,0.8-2,1.8c-0.1,1.8-0.8,2.9-2.8,3
+                   c-1.2,0.1-2,0.8-2,2.1c0.1,1.4,1.1,1.8,2.2,1.8c1.5,0.1,2.3,0.7,2.4,2.3c0.1,1.3,0.6,2.6,2.2,2.6c1.5,0,1.9-1.2,2.1-2.4
+                   c0.2-1.6,0.9-2.5,2.6-2.6c1.2-0.1,2.1-0.7,2.1-2C24.1,15.2,23.1,14.6,21.9,14.6z" />
+          </g>
+        </svg>
+      </span>
+      <md-menu #zoomMenu="mdMenu" class="graph-zoom">
+        <div class="zoom-panel">
+          <span class="zoom-title">
+            Zoom Scales
+          </span>
+          <span type="button" class="zoom-close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </span>
+        </div>
+        <button md-menu-item (click)="onZoomOptionChange('36')">3 Yrs</button>
+        <button md-menu-item (click)="onZoomOptionChange('24')">2 Yrs</button>
+        <button md-menu-item (click)="onZoomOptionChange('12')">1 Yr</button>
+        <button md-menu-item (click)="onZoomOptionChange('6')">6 M</button>
+        <button md-menu-item (click)="onZoomOptionChange('3')">3 M</button>
+        <button md-menu-item (click)="onZoomOptionChange('1')">1 M</button>
+      </md-menu>
+    </div>
+
+    <div id="legend" class="control-button" [md-menu-trigger-for]="symbolsMenu">
+      <svg x="0px" y="0px" viewBox="0 0 40 40" style="enable-background:new 0 0 40 40;" xml:space="preserve">
+        <path class="st0" d="M15.7,33.9c0,3.6-2.1,5-5.6,3.8c-0.6-0.2-0.9-0.6-1-1.2c0-0.7,0.2-1.2,0.9-1.5c2-0.8,1.9-1.7,0-2.5
+               c-0.7-0.3-0.9-0.8-0.8-1.5c0.1-0.9,0.7-1.1,1.5-1.2c0.2,0,0.5,0,0.7,0C15.7,29.5,15.7,29.5,15.7,33.9z" />
+        <path class="st0" d="M29.2,6.5c-2.8-4-6.5-6.2-11.5-5.3C14,1.9,11,3.7,9.6,7.4c-1.2,3.2-0.3,6.1,1.8,8.6c1,1.2,2.4,2.1,3.9,2.6
+               c1.3,0.4,1.6,1.2,1.6,2.5c-0.1,2.4,0,4.9,0,7.3c-0.1,2.7-0.2,5.4,0,8.1c0.2,2.4,1.8,2.6,3.5,2.5c1.9,0,2-1.5,1.9-2.9
+               c0-4.4,0.1-8.7-0.1-13c-0.1-2.4,0.4-4,2.9-5.1C29.7,15.9,31.6,10,29.2,6.5z M19.5,14c-2.9,0-4.8-1.6-4.7-3.9c0-2.2,2-3.7,4.9-3.7
+               c2.9,0,5.2,1.8,5.1,3.9C24.7,12.4,22.4,14,19.5,14z" />
+      </svg>
+      <md-menu #symbolsMenu="mdMenu" class="graph-symbols">
+        <div class="graph-symbols-header">
+          <span class="graph-symbols-title">
+            Graph Symbols
+          </span>
+          <span type="button" class="graph-symbols-close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </span>
+        </div>
+        <div class="ns-legend">
+          <div class="ns-row">
+            <div class="icon-legend">
+              <svg version="1.1" x="0px" y="0px" viewBox="0 0 40 40" style="enable-background:new 0 0 40 40;" xml:space="preserve">
+                <style type="text/css">
+                  .edss-fill {
+                    fill: none;
+                    stroke: #EA700D;
+                    stroke-miterlimit: 10;
+                  }
+
+                  .edss-fill2 {
+                    fill: #EA700D;
+                    stroke: #EA700D;
+                    stroke-miterlimit: 10;
+                  }
+                </style>
+                <g>
+                  <line class="edss-fill" x1="1" y1="19.9" x2="38.4" y2="19.9" />
+                  <circle class="edss-fill2" cx="19.3" cy="19.5" r="8" />
+                </g>
+              </svg>
+            </div>
+            <div class="lebal-legend">EDSS</div>
+          </div>
+
+          <div class="ns-row">
+            <div class="icon-legend">
+              <svg version="1.1" id="graph-walk" x="0px" y="0px" viewBox="0 0 40 40" style="enable-background:new 0 0 40 40;"
+                xml:space="preserve">
+                <style type="text/css">
+                  .graph-walk {
+                    fill: #31859B;
+                  }
+
+                  .graph-walk2 {
+                    fill: none;
+                    stroke: #31859B;
+                    stroke-miterlimit: 10;
+                  }
+                </style>
+                <g>
+                  <circle class="graph-walk" cx="20.4" cy="20.5" r="8" />
+                  <line class="graph-walk2" x1="1.7" y1="20.1" x2="38.3" y2="20.1" />
+                </g>
+              </svg>
+            </div>
+            <div class="lebal-legend">25' Walk</div>
+          </div>
+
+          <div class="ns-row">
+            <div class="icon-legend">
+              <svg version="1.1" id="relapse-unconfirmed" x="0px" y="0px" viewBox="0 0 40 40" style="enable-background:new 0 0 40 40;"
+                xml:space="preserve">
+                <style type="text/css">
+                  .graph-relapse2 {
+                    fill: #FFFFFF;
+                    stroke: #E53935;
+                    stroke-miterlimit: 10;
+                  }
+                </style>
+                <polygon class="graph-relapse2" points="20.7,30.3 30.1,14 11.3,14 " />
+              </svg>
+
+            </div>
+            <div class="lebal-legend">Relapse (Unconfirmed)</div>
+          </div>
+          <div class="ns-row">
+            <div class="icon-legend">
+              <svg version="1.1" id="relapse-confirmed" x="0px" y="0px" viewBox="0 0 40 40" style="enable-background:new 0 0 40 40;"
+                xml:space="preserve">
+                <style type="text/css">
+                  .graph-relapse {
+                    fill: #E53935;
+                  }
+                </style>
+                <polygon class="graph-relapse" points="20.7,30.3 30.1,14 11.3,14 " />
+              </svg>
+            </div>
+            <div class="lebal-legend">Relapse (Confirmed)</div>
+          </div>
+          <div class="ns-row">
+            <div class="icon-legend">
+              <svg version="1.1" id="reported-symptoms" x="0px" y="0px" viewBox="0 0 40 40" style="enable-background:new 0 0 40 40;"
+                xml:space="preserve">
+                <style type="text/css">
+                  .reported-symptoms0 {
+                    clip-path: url(#SVGID_2_);
+                    fill-rule: evenodd;
+                    clip-rule: evenodd;
+                    fill: #EA700D;
+                  }
+
+                  .reported-symptoms1 {
+                    clip-path: url(#SVGID_2_);
+                  }
+
+                  .reported-symptoms2 {
+                    clip-path: url(#SVGID_4_);
+                    fill: none;
+                    stroke: #EA700D;
+                    stroke-width: 1.7638;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                    stroke-miterlimit: 10;
+                  }
+
+                  .reported-symptoms3 {
+                    clip-path: url(#SVGID_4_);
+                  }
+
+                  .reported-symptoms4 {
+                    clip-path: url(#SVGID_6_);
+                  }
+
+                  .reported-symptoms5 {
+                    clip-path: url(#SVGID_8_);
+                  }
+
+                  .reported-symptoms6 {
+                    clip-path: url(#SVGID_10_);
+                    fill: #FFFFFF;
+                  }
+                </style>
+                <g>
+                  <g>
+                    <defs>
+                      <polygon id="SVGID_1_" points="5.1,34.3 34.5,34.3 34.5,6 5.1,6 5.1,34.3 			" />
+                    </defs>
+                    <clipPath id="SVGID_2_">
+                      <use xlink:href="#SVGID_1_" style="overflow:visible;" />
+                    </clipPath>
+                    <path class="reported-symptoms0" d="M10.2,32.4h20.2c1.4,0,2.5-1.1,2.5-2.5V11.1c0-1.4-1.1-2.5-2.5-2.5H10.2c-1.4,0-2.5,1.1-2.5,2.5v18.7
+                                                       C7.7,31.2,8.8,32.4,10.2,32.4L10.2,32.4z" />
+                    <g class="reported-symptoms1">
+                      <defs>
+                        <polygon id="SVGID_3_" points="5.1,34.3 34.5,34.3 34.5,6 5.1,6 5.1,34.3 				" />
+                      </defs>
+                      <clipPath id="SVGID_4_">
+                        <use xlink:href="#SVGID_3_" style="overflow:visible;" />
+                      </clipPath>
+                      <path class="reported-symptoms2" d="M10.2,32.4h20.2c1.4,0,2.5-1.1,2.5-2.5V11.1c0-1.4-1.1-2.5-2.5-2.5H10.2c-1.4,0-2.5,1.1-2.5,2.5v18.7
+                                                           C7.7,31.2,8.8,32.4,10.2,32.4L10.2,32.4z" />
+                      <g class="reported-symptoms3">
+                        <defs>
+                          <polygon id="SVGID_5_" points="5.1,34.3 34.5,34.3 34.5,6 5.1,6 5.1,34.3 					" />
+                        </defs>
+                        <clipPath id="SVGID_6_">
+                          <use xlink:href="#SVGID_5_" style="overflow:visible;" />
+                        </clipPath>
+                        <g class="reported-symptoms4">
+                          <defs>
+                            <polygon id="SVGID_7_" points="10.9,30.7 29.8,30.7 29.8,9.6 10.9,9.6 10.9,30.7 						" />
+                          </defs>
+                          <clipPath id="SVGID_8_">
+                            <use xlink:href="#SVGID_7_" style="overflow:visible;" />
+                          </clipPath>
+                          <g class="reported-symptoms5">
+                            <defs>
+                              <polygon id="SVGID_9_" points="10.9,30.7 29.8,30.7 29.8,9.6 10.9,9.6 10.9,30.7 							" />
+                            </defs>
+                            <clipPath id="SVGID_10_">
+                              <use xlink:href="#SVGID_9_" style="overflow:visible;" />
+                            </clipPath>
+                            <path class="reported-symptoms6" d="M17.2,30.5c-0.7-0.3-1-0.9-1-1.7c0.1-1.8,0-3.6,0-5.4c0-0.2,0-0.3,0-0.5c0.8,0.6,1.7,1.1,2.6,1.8
+                                                                       c0,1.4,0,3,0,4.5c0,0.6-0.4,0.9-0.9,1.2C17.7,30.5,17.5,30.5,17.2,30.5L17.2,30.5z" />
+                            <path class="reported-symptoms6" d="M20.9,30.5c-0.7-0.4-0.9-1-0.9-1.8c0.1-1.3,0-2.5,0-3.8c0.9-0.1,1.7-0.2,2.6-0.3c0,0.8,0,1.7,0,2.6
+                                                                       c0,0.5,0,1.1,0,1.6c0.1,0.8-0.2,1.4-1,1.7C21.4,30.5,21.1,30.5,20.9,30.5L20.9,30.5z" />
+                            <path class="reported-symptoms6" d="M19.9,9.6c0.6,0.2,1.2,0.6,1.4,1.3c0.4,1-0.1,2.1-1.1,2.5c-1,0.4-2.1-0.1-2.5-1c-0.4-1,0-2.1,0.9-2.5
+                                                                       c0.1-0.1,0.3-0.1,0.4-0.2C19.3,9.6,19.6,9.6,19.9,9.6L19.9,9.6z" />
+                            <path class="reported-symptoms6" d="M25,21.6c1.5,1.5,3,3,4.4,4.4c0.5,0.5,0.4,1.3-0.1,1.8c-0.5,0.5-1.3,0.5-1.8,0.1c-1.5-1.4-3-2.9-4.4-4.4
+                                                                       c-2.7,1.4-5.3,0.2-6.5-1.5c-1.3-1.9-1.1-4.5,0.6-6.2c1.6-1.7,4.3-1.9,6.2-0.6C25.1,16.2,26.4,18.7,25,21.6L25,21.6z
+                                                                        M24.5,19.1c0-2.1-1.7-3.8-3.8-3.8c-2.1,0-3.8,1.7-3.8,3.8c0,2.1,1.7,3.8,3.8,3.8S24.5,21.3,24.5,19.1L24.5,19.1z" />
+                            <path class="reported-symptoms6" d="M17.4,14.4c-0.5,0.7-1.1,1.4-1.7,2c-0.1,0.1-0.3,0.2-0.4,0.2c-1.1,0-2.2,0-3.2,0c-0.8,0-1.2-0.5-1.2-1.2
+                                                                       c0-0.6,0.5-1,1.2-1c1.7,0,3.3,0,5,0C17.2,14.4,17.3,14.4,17.4,14.4L17.4,14.4z" />
+                            <path class="reported-symptoms6" d="M24,14.4c1,0,2.1,0,3.2,0c0.5,0,0.9,0.5,0.9,1c0,0.5-0.3,1-0.8,1.1c-0.5,0.1-0.9,0.1-1.4,0.1
+                                                                       c-0.1,0-0.2-0.1-0.3-0.2C25.1,15.7,24.5,15,24,14.4L24,14.4z" />
+                            <path class="reported-symptoms6" d="M22.6,19.2c0,0.7,0,1.3,0,2c0,0.2-0.1,0.5-0.3,0.6c-1.2,0.8-2.9,0.5-3.9-0.5c-1-1.2-1-2.9-0.1-4
+                                                                       c1-1.1,2.6-1.4,3.9-0.7c0.3,0.2,0.4,0.3,0.4,0.7C22.6,17.9,22.6,18.5,22.6,19.2L22.6,19.2z" />
+                          </g>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+
+            </div>
+            <div class="lebal-legend">Reported Symptoms</div>
+          </div>
+          <div class="ns-row">
+            <div class="icon-legend">
+              <svg version="1.1" x="0px" y="0px" viewBox="0 0 40 40" style="enable-background:new 0 0 40 40;" xml:space="preserve">
+                <style type="text/css">
+                  .orders0 {
+                    fill: #A5A5A5;
+                  }
+                </style>
+                <circle class="orders0" cx="20" cy="20" r="13" />
+              </svg>
+            </div>
+            <div class="lebal-legend">Orders - All Resulted</div>
+          </div>
+          <div class="ns-row">
+            <div class="icon-legend">
+              <svg version="1.1" id="orders-some" x="0px" y="0px" viewBox="0 0 40 40" style="enable-background:new 0 0 40 40;"
+                xml:space="preserve">
+                <style type="text/css">
+                  .orders-some0 {
+                    fill: #FFFFFF;
+                    stroke: #A5A5A5;
+                    stroke-miterlimit: 10;
+                  }
+
+                  .orders-some1 {
+                    fill: #A5A5A5;
+                    stroke: #A5A5A5;
+                    stroke-miterlimit: 10;
+                  }
+                </style>
+                <circle class="orders-some0" cx="20" cy="20" r="13" />
+                <path class="orders-some1" d="M33,20c0,7.2-5.8,13-13,13S7,27.2,7,20" />
+              </svg>
+            </div>
+            <div class="lebal-legend">Orders - Some Resulted</div>
+          </div>
+          <div class="ns-row">
+            <div class="icon-legend">
+              <svg version="1.1" x="0px" y="0px" viewBox="0 0 40 40" style="enable-background:new 0 0 40 40;" xml:space="preserve">
+                <style type="text/css">
+                  .orders-none-resulted0 {
+                    fill: #FFFFFF;
+                    stroke: #A5A5A5;
+                    stroke-miterlimit: 10;
+                  }
+                </style>
+                <circle class="orders-none-resulted0" cx="20" cy="20" r="13" />
+              </svg>
+            </div>
+            <div class="lebal-legend">Orders - None Resulted</div>
+          </div>
+          <div class="ns-row">
+            <div class="icon-legend">
+              <svg version="1.1" id="zoom-scales" x="0px" y="0px" viewBox="0 0 40 40" style="enable-background:new 0 0 40 40;"
+                xml:space="preserve">
+                <style type="text/css">
+                  .zoom-scales0 {
+                    fill: #AAAAAA;
+                  }
+                </style>
+                <g>
+                  <path class="zoom-scales0" d="M33.3,29.5c-1.3-1.7-2.8-3.3-4.5-4.6c-1.2-0.9-1.5-1.6-0.7-3c0.9-1.5,1.3-3.3,1.2-4.9c0-6-4.3-11-9.9-11.6
+                                                   c-6-0.7-11.6,3.3-12.7,9.1c-0.8,4.3,0.5,8.1,3.9,10.9c3.4,2.9,7.4,3.4,11.5,1.8c1.5-0.6,2.3-0.4,3.4,0.9c1.3,1.7,3,3.1,4.6,4.5
+                                                   c1,0.9,2.1,1.3,3.2,0.1C34.3,31.7,34.1,30.6,33.3,29.5z M18.1,24.2c-4.2,0-7.7-3.3-7.7-7.3c0-4.2,3.5-7.7,7.6-7.7
+                                                   c4,0,7.3,3.4,7.4,7.4C25.5,20.8,22.3,24.2,18.1,24.2z" />
+                  <path class="zoom-scales0" d="M21.5,15.2c-1.4,0-2-0.8-2.1-2.1c-0.1-0.8-0.5-1.3-1.4-1.3c-0.9,0-1.4,0.5-1.4,1.3c-0.1,1.3-0.6,2.1-2.1,2.2
+                                                   c-0.8,0-1.5,0.6-1.4,1.5c0.1,1,0.8,1.3,1.6,1.3c1.1,0,1.7,0.5,1.8,1.7c0.1,1,0.4,1.9,1.6,1.9c1.1,0,1.4-0.9,1.5-1.7
+                                                   c0.2-1.1,0.6-1.8,1.9-1.9c0.9,0,1.5-0.5,1.5-1.5C23.1,15.7,22.4,15.3,21.5,15.2z" />
+                </g>
+              </svg>
+            </div>
+            <div class="lebal-legend">Zoom Scales</div>
+          </div>
+          <div class="ns-row">
+            <div class="icon-legend">
+              <svg version="1.1" id="back-to-default" x="0px" y="0px" viewBox="0 0 40 40" style="enable-background:new 0 0 40 40;"
+                xml:space="preserve">
+                <style type="text/css">
+                  .back-to-default0 {
+                    fill: #AAAAAA;
+                  }
+                </style>
+                <path class="back-to-default0" d="M13,18.2c-1.6,0-3.3,0-4.9,0c-1.5,0-2.2-0.8-1.8-2.2C7,12.6,7.8,9.3,8.5,6c0.1-0.6,0.4-1,1-1.1
+                                           c0.6-0.1,1,0.1,1.3,0.6c0.6,0.7,1.2,1.4,1.7,2.2c0.5,0.7,0.9,0.8,1.8,0.4c8-4.3,17.9,0.2,19.8,9.1c1.3,5.7-1.4,11.8-6.3,14.6
+                                           c-5.2,3-11.9,2.4-16.2-1.6c-1.1-1-1.1-1-0.1-2.1c0.7-0.7,1.5-1.4,2.2-2.2c0.6-0.7,1-0.6,1.7,0c3,2.7,7.1,2.9,10.3,0.4
+                                           c2.5-2,3.6-4.7,2.8-7.9c-0.7-3.3-2.9-5.3-6.2-6.1c-1.6-0.4-3.1-0.2-4.6,0.4c-0.6,0.3-0.8,0.6-0.3,1.2c0.6,0.7,1.1,1.5,1.7,2.2
+                                           c0.4,0.5,0.5,0.9,0.2,1.5c-0.3,0.6-0.7,0.7-1.3,0.7C16.4,18.2,14.7,18.2,13,18.2C13,18.2,13,18.2,13,18.2z" />
+              </svg>
+            </div>
+            <div class="lebal-legend">Back to Default</div>
+          </div>
+
+        </div>
+      </md-menu>
+    </div>
+
+    <i id="cleanCache" (click)="cleanCache()" class="fa fa-refresh" aria-hidden="true" style="font-size:22px;color:#bfbfbf;margin-left:1px;cursor:pointer"></i>
+  </div>
+</div>
+
+<ng-template #virtualCaseloadInfoTemplate>
+  <div class="virtual-caseload-header">
+    <div class="virtual-caseload-title">Virtual Caseload</div>
+    <div class="virtual-caseload-close">
+      <i (click)="virtualCaseloadInfoDialogRef.close()" class="material-icons">clear</i>
+    </div>
+  </div>
+  <div class="modal-body">
+    <div class="virtual-caseload-content">
+      This is a cohort of comparable patients from UCSF who were all prospectively followed in the modern treatment
+      era. The cohort graph is based on disease duration, which requires age of onset to be entered in the neuroSHARE
+      app. Visualizing your patient's course in the context of this "virtual caseload" highlights patients who may
+      require intensification of treatment.
+    </div>
+    <div class="url-container">
+      <a *ngIf="learnMoreUrl" [href]="learnMoreUrl" target="_blank" class="learn-more pull-left"> Learn More
+      </a>
+    </div>
+  </div>
+</ng-template>

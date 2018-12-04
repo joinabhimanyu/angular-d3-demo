@@ -1,0 +1,152 @@
+$ns-symptoms-grey:#a5a5a5;
+$ns-symtoms-bg-gray:#d8d8d8;
+$ns-symptoms-red:#ff0000;
+$ns-symptoms-black:#3f3f3f;
+
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+}
+
+.borderTop{border-top:1px solid #7e7e7e;}
+.symptoms-container{ padding: 10px;
+.ns-symtoms-head-panel{
+    border-bottom: solid 1px #bfbfbf; display: flex; padding: 10px 10px 10px 40px; margin-bottom: 10px; 
+    .ns-symtoms-item{
+        margin-right:60px;
+        .ns-symtoms-header{
+            font-size: 13pt;
+            font-weight:bold;
+            color:#7e7e7e;
+        }
+        .ns-symtoms-value{
+            font-weight: normal;
+            font-size: 9pt;
+        }
+    }
+
+}
+.ns-symptoms-header{
+    font-size: 13pt; 
+    margin-bottom: 20px;
+}
+.ns-symptoms-header:after{
+    clear: both;
+    display: block;
+    content: '';
+}
+.ns-symptoms-reported { float: left; width:238px; margin-left: 48px;}
+.ns-symptoms-status { float: left; width: 100px;padding-left: 10px;}
+.ns-symptoms-trend { float: left; width: 100px;padding-left: 15px;}
+.ns-symptoms-quest { float: left; width: 100px;}
+.ns-symptoms-row{ margin-bottom: 5px;}
+.ns-symptoms-row:after{
+    clear: both;
+    content: '';
+    display: block;   
+}
+.ns-small-bar{
+    width: 6px;
+    margin-right: 5px;
+    height: 40px;
+    float: left;
+    margin-left:37px;
+    background-color: $ns-symptoms-grey;
+}
+.ns-small-box{
+    width: 30px;
+    margin-right: 5px;
+    height: 30px;
+    float: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 30px;
+    text-align:center;
+    padding: 5px;
+    }     
+.ns-small-box-text{
+        width: 100px;
+        margin-right: 5px;
+        height: 30px;
+        float: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 30px;
+        text-align:left;
+        padding: 5px;
+        background-color: #ececec;
+        font-weight:bold;
+        color:black;
+}  
+.ns-order-symptoms-box{ 
+    background-color: #ececec; 
+    float: left; margin-right: 5px; width: 230px; height: 30px; padding: 5px;
+
+    .ns-symptoms-name{
+        font-size:10pt;
+        font-weight:bold;
+    }
+    .ns-symtoms-date-box{
+        display: flex;
+        .ns-symptoms-reportDate{
+            font-size: 8pt;
+        }
+        .ns-symptoms-previous
+        {
+            @include border-radius(10px);
+            font-size: 7pt;
+            color:#ffffff;
+            background-color: $ns-symptoms-black;
+            padding: 1px 5px;
+            margin-left: auto;
+        }
+        .ns-symptoms-new
+        {
+            @include border-radius(10px);
+            font-size: 7pt;
+            padding: 1px 5px;
+            color:#ffffff;
+            background-color: $ns-symptoms-red;
+            margin-left: auto;
+        }
+    }
+}
+
+.ns-symptoms-trend-box{ float: left; width: 105px; height: 40px; display: block; line-height: 30px;}
+.ns-symptoms-quest-unit{ float: left; margin-top:10px; }
+.ns-symptoms-quest-unit .call-out-buttons{
+    width: 65px;
+}
+.ns-symptoms-items-container{
+    height: 400px; overflow: auto;
+}
+
+}
+.symptoms-container-qx{
+    height: 300px; overflow: auto; padding: 10px;
+.ns-symptoms-qx{
+    border-bottom: solid 1px #bfbfbf; padding-bottom: 10px; margin-bottom: 10px;
+    .ns-symptoms-name-quest{ display: block; padding-bottom: 5px; font-size: 13pt; font-weight: bold;}
+    .ns-symptoms-name-det{ margin-bottom: 5px;  padding: 3px;  display: block; counter-reset: #494949; }
+    .ns-symptoms-name-red{ background-color: #fbe2cf; padding: 5px; margin-bottom: 5px; display: block; font-weight: bold;}
+        .ns-symptoms-name-quest{
+            font-size:10pt;
+            font-weight:bold;
+        }
+    }
+.ns-symptoms-qx:last-child{border-bottom: solid 0px #bfbfbf; }
+}
+
+
+.st0{clip-path:url(#SVGID_2_);fill-rule:evenodd;clip-rule:evenodd;fill:#EA700D;}
+.st1{clip-path:url(#SVGID_2_);}
+
+  .st2{clip-path:url(#SVGID_4_);fill:none;stroke:#EA700D;stroke-width:1.7638;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+.st3{clip-path:url(#SVGID_4_);}
+.st4{clip-path:url(#SVGID_6_);}
+.st5{clip-path:url(#SVGID_8_);}
+.st6{clip-path:url(#SVGID_10_);fill:#FFFFFF;}

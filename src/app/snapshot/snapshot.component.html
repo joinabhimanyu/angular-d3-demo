@@ -1,0 +1,19 @@
+<section>
+    <div class="graph-neuro">
+        <div class="neuro-related">
+            <app-neuro-related></app-neuro-related>
+        </div>
+        <div class="graph-panel">
+            <app-graph-panel></app-graph-panel>
+        </div>
+        <div class="right-panel">
+            <div>
+                <sh-patient-concerns [patientConcernsData]="patientConcernsData" [patientName]="patientName" [csn]="csn"></sh-patient-concerns>
+            </div>
+            <div class="neuro-related-care">
+                <app-cds></app-cds>
+            </div>
+        </div>
+    </div>
+    <notes-writer [classIcon]="'icon-pen'" [readOnly]="readOnlyNote"></notes-writer>
+</section>

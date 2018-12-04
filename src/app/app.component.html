@@ -1,0 +1,10 @@
+<spinner></spinner>
+<md-sidenav-container>
+  <div class="md-sidenav-backdrop"></div>
+  <demographic-bar *ngIf="showBar"></demographic-bar>
+  <nav-bar *ngIf="showBar" [menuOptionsTop]="menuOptionsTop" [menuOptionsBottom]="menuOptionsBottom" (onMenuOptionClicked)="menuOptionClicked($event)"></nav-bar>
+  <div class="main-container">
+    <router-outlet>
+    </router-outlet>
+  </div>
+</md-sidenav-container>

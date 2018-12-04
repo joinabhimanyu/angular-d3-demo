@@ -1,0 +1,63 @@
+<ng-template #imagingSecondLevelTemplate>
+    <div class="modal-header draggable" (mousedown)="registerDrag($event)">
+        <h4 class="modal-title">Imaging</h4>
+        <button type="button" class="close" aria-label="Close" (click)="dialogRef.close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="imaging-container">
+            <div class="ns-imaging-header">
+                <div class="ns-imaging-col">Study</div>
+                <div class="ns-imaging-col">Ordered</div>
+                <div class="ns-imaging-data">See Data</div>
+            </div>
+            <div class="ns-imaging-row" *ngFor="let imaging of imagingDataDetails; let i = index;">
+                <div class="ns-imaging-col">{{imaging.displayName}}</div>
+                <div class="ns-imaging-col">{{neuroGraphService.moment(imaging.orderDate).format('MM/DD/YYYY')}}</div>
+                <div class="ns-imaging-icon">
+                    <span *ngIf="imaging['image_launch_url']!=''" class="icon-brainneuroshare" style="cursor:pointer;"
+                        (click)="showImage(imaging['image_launch_url'])"></span>
+                    <span *ngIf="imaging.impression.length > 0 || imaging.narrative.length > 0" class="icon-documentneuroshare"
+                        style="cursor:pointer;" (click)="showResult(imaging)"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<ng-template #imagingThirdLevelTemplate>
+    <div class="modal-header draggable" (mousedown)="registerDrag($event)">
+        <h4 class="modal-title">Imaging Report</h4>
+        <button type="button" class="close" aria-label="Close" (click)="reportDialogRef.close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="imaging-container">
+            <div class="ns-imaging-header-study">
+                <div class="ns-imaging-study">Study Name</div>
+                <div class="ns-imaging-study">Study Date</div>
+                <div class="ns-imaging-study">Reading Radiologist</div>
+            </div>
+
+            <div class="ns-imaging-row">
+                <div *ngIf="imagingReportDetails.impression.length > 0 || imagingReportDetails.narrative.length > 0">
+                    <div class="ns-imaging-sub-header">
+                        <div class="ns-imaging-study">{{imagingReportDetails.displayName}}</div>
+                        <div class="ns-imaging-study">{{imagingReportDetails.resultDate}}</div>
+                        <div class="ns-imaging-study">{{imagingReportDetails.readingRadiologist}}</div>
+                    </div>
+                    <div class="ns-imgression">
+                        <span class="ns-imaging-study">Study Results</span>
+                        <div *ngFor="let imp of imagingReportDetails.impression;">
+                            {{imp}}
+                        </div>
+                    </div>
+                    <div *ngFor="let nar of imagingReportDetails.narrative;">
+                        {{nar}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

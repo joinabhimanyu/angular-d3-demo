@@ -1,0 +1,188 @@
+.dmt-container {
+  padding: 10px;
+}
+
+.ns-dmt-row {
+  margin-bottom: 5px;
+}
+
+.ns-dmt-col {
+  width: 59%;
+  display: inline-block;
+  text-align: left;
+}
+
+.ns-dmt-value {
+  width: 39%;
+  display: inline-block;
+  text-align: right;
+}
+
+.ns-selectBox {
+  .mat-select-trigger {
+    display: flex;
+    align-items: center;
+    height: 20px;
+    cursor: pointer;
+  }
+
+  .mat-select-value {
+    left: 10px
+  }
+
+  .mat-select-value-text {
+    line-height: 10pt
+  }
+
+  .mat-select-trigger {
+    font-size: 10pt;
+  }
+
+  .mat-select {
+    padding-top: 0px;
+  }
+}
+
+.lebel-with-bg {
+  display: inline-block;
+  background-color: #ececec;
+  text-align: left;
+  padding: 3px;
+}
+
+.ns-dmt-report-month {
+  @extend .lebel-with-bg;
+  margin-right: 5px;
+  width: 62px;
+}
+
+.ns-dmt-report-year {
+  @extend .lebel-with-bg;
+  width: 62px;
+}
+
+.ns-dmt-model {
+  @extend .lebel-with-bg;
+  width: 136px;
+}
+
+.ns-dmt-selectBox-value {
+  width: 39%;
+  display: inline-block;
+  @extend .ns-selectBox;
+
+  .mat-select-trigger {
+    min-width: 70px;
+    width: 72px;
+  }
+}
+
+.ns-dmt-selectBox-reason {
+  width: 39%;
+  display: inline-block;
+  @extend .ns-selectBox;
+
+  .mat-select-trigger {
+    min-width: 145px;
+  }
+}
+
+.ns-dmt-selectBox-reason .mat-form-field {
+  width: 145px !important;
+}
+
+.ns-dmt-update {
+  float: right;
+  margin-bottom: 10px;
+  padding: 10px 5px 10px 0px;
+}
+
+.icon-button {
+  float: right;
+  width: 20px;
+  border: 1px solid;
+  text-align: center;
+  cursor: pointer;
+  margin-top: -10px;
+}
+
+
+.vitamin-d3-container {
+  padding: 10px;
+}
+
+.ns-vitamin-d3-row {
+  margin-bottom: 5px;
+}
+
+.ns-vitamin-d3-col {
+  width: 39%;
+  display: inline-block;
+  text-align: left;
+}
+
+.ns-vitamin-d3-value {
+  width: 59%;
+  display: inline-block;
+  text-align: right;
+}
+
+.ns-vitamin-d3-text {
+  font-style: Italic;
+  padding-top: 10px;
+  margin-top: 10px;
+  border-top: solid 1px #bfbfbf;
+}
+
+.ns-vitamin-d3-update {
+  float: right;
+  margin-bottom: 10px;
+  padding: 10px 5px 10px 0px;
+}
+
+
+.other-meds-container {
+  padding: 10px;
+}
+
+.ns-other-meds-row {
+  margin-bottom: 5px;
+}
+
+.ns-other-meds-col {
+  width: 59%;
+  display: inline-block;
+  text-align: left;
+}
+
+.ns-other-meds-value {
+  width: 39%;
+  display: inline-block;
+  text-align: right;
+}
+
+.ns-other-meds-selectBox {
+  width: 39%;
+  display: inline-block;
+  @extend .ns-selectBox;
+
+  .mat-select-trigger {
+    min-width: 146px;
+  }
+}
+
+.ns-other-meds-model {
+  @extend .lebel-with-bg;
+  width: 136px;
+}
+
+.ns-other-meds-text {
+  font-style: Italic;
+  padding-top: 5px;
+}
+
+.ns-other-meds-update {
+  float: right;
+  margin-bottom: 10px;
+  padding: 10px 5px 10px 0px;
+}

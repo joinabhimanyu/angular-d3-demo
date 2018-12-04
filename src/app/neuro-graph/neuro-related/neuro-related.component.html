@@ -1,0 +1,89 @@
+<div class="header-area">
+  <span class="header-text">MS Related</span>
+</div>
+<div class="ms-related-panel">
+  <div class="related-add-today">
+    <div class="related-add-today-label">
+          Add<br/>Today
+    </div>
+  </div>
+  <div class="related-panel">
+    <div class="related-treatments">
+      <div class="related-rotate-text">TREATMENTS</div>
+    </div>
+    <div class="related-items">
+      <ul class="related-items-ul">
+        <li class="ns-dmt-theme">
+          <md-checkbox [(ngModel)]="items.dmt" (change)='changed($event,"dmt")' >DMT</md-checkbox>
+        </li>
+        <li class="ns-othermeds-theme">
+          <md-checkbox [(ngModel)]="items.otherMeds"  (change)='changed($event,"otherMeds")'>Symptom Meds</md-checkbox>
+        </li>
+        <li class="ns-vitaminD-theme">
+          <md-checkbox [(ngModel)]="items.vitaminD" (change)='changed($event,"vitaminD")'>Vitamin D</md-checkbox>
+        </li>
+        <li class="ns-referrals-theme">
+          <md-checkbox  (change)='changed($event,"referrals")' [disabled]="true">Referrals</md-checkbox>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="related-panel">
+    <div class="related-outcomes">
+      <div class="related-rotate-text">OUTCOMES</div>
+    </div>
+    <div class="related-items">
+      <ul class="related-items-ul">
+        <li class="ns-edss-theme">
+          <md-checkbox [checked]="true" [(ngModel)]="items.edss" (change)='changed($event,"edss")'>EDSS</md-checkbox>
+          <span class="plus-icon" [style.color]="getStyle()" (click)="openDialog('edss')">+</span></li>
+        <li class="ns-25walk-theme">
+          <md-checkbox [(ngModel)]="items.walk25Feet" (change)='changed($event,"walk25Feet")'>25' Walk</md-checkbox><span class="plus-icon" [style.color]="getStyle()" (click)="openDialog('walk25Feet')">+</span>
+        </li>
+        <li class="ns-relapses-theme">
+          <md-checkbox [(ngModel)]="items.relapses"  (change)='changed($event,"relapses")'>Relapses</md-checkbox><span class="plus-icon" [style.color]="getStyle()" (click)="openDialog('relapses')">+</span></li>
+        <li class="ns-images-theme">
+          <md-checkbox [(ngModel)]="items.imaging"  (change)='changed($event,"imaging")'>Imaging</md-checkbox>
+        </li>
+        <li class="ns-symptoms-theme">
+          <md-checkbox [(ngModel)]="items.symptoms" (change)='changed($event,"symptoms")' >Symptoms</md-checkbox>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="related-panel">
+    <div class="related-monitoring">
+      <div class="related-rotate-text">MONITORING</div>
+    </div>
+    <div class="related-items">
+      <ul class="related-items-ul">
+        <li class="ns-labs-theme">
+          <md-checkbox [(ngModel)]="items.labs" [checked]="true" (change)='changed($event,"labs")'>Labs</md-checkbox>
+        </li>
+        <li class="ns-vaccinations-theme" style="display:none;">
+          <md-checkbox (change)='changed($event,"vaccinations")'>Vaccinations</md-checkbox>
+        </li>
+        <li class="ns-dme-theme">
+          <md-checkbox (change)='changed($event,"dme")' [disabled]="true">DME</md-checkbox><span class="plus-icon" style="color:#b0b0b0;">+</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="related-panel">
+    <div class="related-encounters">
+      <div class="related-rotate-text">ENCOUNTERS</div>
+    </div>
+    <div class="related-items">
+      <ul class="related-items-ul">
+        <li class="ns-encounters-theme">
+          <md-checkbox (change)='changed($event,"office")' [disabled]="true">Office</md-checkbox>
+        </li>
+        <li class="ns-encounters-theme">
+          <md-checkbox (change)='changed($event,"mho")' [disabled]="true">MHO</md-checkbox>
+        </li>
+        <li class="ns-encounters-theme">
+          <md-checkbox (change)='changed($event,"phone")' [disabled]="true">Phone</md-checkbox>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

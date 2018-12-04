@@ -1,0 +1,16 @@
+<ng-template #progressNoteTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title">{{lastOfficeDateLabel}} - Progress Note</h4>
+    <button type="button" class="close" aria-symptomel="Close" (click)="dialogRef.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="progressnote-container">
+      <div class="ns-progressnote-div" *ngFor="let pNote of progressNotes;">
+        <span class="ns-progressnote-header">{{pNote.title}}</span>
+        <div class="ns-progressnote-det" [innerHTML]="pNote.htmlText"></div>
+      </div>
+    </div>
+  </div>
+</ng-template>

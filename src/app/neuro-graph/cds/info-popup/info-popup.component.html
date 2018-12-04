@@ -1,0 +1,20 @@
+<div class="cds-container">
+  <div class="cds-header">
+    <div class="cds-header-title">
+      {{displayInfo.title}}
+    </div>
+    <div class="cds-header-close" (click)="closeDialog()">
+      <span aria-hidden="true">&times;</span>
+    </div>
+  </div>
+  <div class="cds-content">
+    <div *ngFor="let i of displayInfo.info">
+      {{i}}
+    </div>
+  </div>
+  <div class="urlContainer">
+    <a *ngIf="displayInfo.learn_more" [href]="displayInfo.learn_more" target="_blank" class="pull-left"> Learn More </a>
+    <a *ngIf="displayInfo.publication" [href]="displayInfo.publication" target="_blank" [ngClass]="{'pull-right': displayInfo.learn_more}">
+    See publication </a>
+  </div>
+</div>

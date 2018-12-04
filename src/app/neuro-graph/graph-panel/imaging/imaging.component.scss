@@ -1,0 +1,64 @@
+.imaging-container {
+  padding: 10px;
+  max-height: 544px;
+  overflow: auto;
+}
+
+.ns-imaging-row {
+  margin-bottom: 7px;
+}
+
+.ns-imaging-header {
+  margin-bottom: 10px;
+}
+
+.ns-imaging-col {
+  width: 35%;
+  float: left;
+  padding-right: 10px;
+  min-height: 15px;
+}
+
+.ns-imaging-data {
+  width: 21%;
+  float: right;
+}
+
+.ns-imaging-icon {
+  font-size: 24pt;
+  color: #aaaaaa;
+  text-align: center;
+  float: left;
+}
+
+.ns-imaging-row:after,
+.ns-imaging-header:after {
+  clear: both;
+  content: '';
+  display: block;
+}
+
+.ns-imaging-header-study {
+  background-color: #efe4f4;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.ns-imaging-sub-header {
+  padding: 5px;
+  margin-bottom: 10px;
+  border-bottom: solid 1px #AAAAAA;
+
+}
+
+.ns-imaging-study {
+  width: 30%;
+  display: inline-block;
+  font-weight: bold;
+  padding: 3px;
+
+}
+
+.ns-imgression {
+  margin-bottom: 10px;
+}

@@ -1,0 +1,14 @@
+@import '~@angular/material/_theming';
+@import 'palette';
+@include mat-core();
+
+$palette-primary: mat-palette($primary, 600);
+$palette-accent: mat-palette($accent, A100);
+$palette-warn: mat-palette($warn);
+
+$sutter-theme: mat-light-theme($palette-primary, $palette-accent, $palette-warn);
+
+@include angular-material-theme($sutter-theme);
+
+
+

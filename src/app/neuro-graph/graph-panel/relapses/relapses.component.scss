@@ -1,0 +1,67 @@
+
+.relapse-container{padding: 10px;}
+.ns-relapse-row{ margin-bottom: 5px;}
+.ns-relapse-col{ width: 33%; display: inline-block; text-align: left;}
+.ns-relapse-selectBox {
+    .mat-select-trigger {
+    display: flex;
+    align-items: center;
+    height: 20px;
+    min-width: 70px;
+    width: 72px;
+    cursor: pointer;
+    }
+    .mat-select-value{ left: 10px}
+    .mat-select-value-text{ line-height: 10pt}
+    .mat-select-trigger {
+        font-size: 10pt;
+    }
+    .mat-select{
+        padding-top: 0px;
+    }    
+}
+.ns-relapse-value{ width:65%; float: right;
+    @extend .ns-relapse-selectBox; 
+   
+}
+.ns-relapse-value-bg{background-color: #d8d8d8; border-bottom: solid 1px #ea700d; padding: 2px; width: 50px; text-align: center;}
+.ns-relapse-row:after{
+    clear: both;
+    content: '';
+    display: block;
+}
+.ns-relapse-addbox{ margin-left: 33%;}
+.ns-relapse-close{ 
+    width: 50px; 
+    display:inline-block;
+    .mat-icon-button {
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+    }
+    .material-icons{
+        font-size: 12pt;
+    }
+}
+
+.ns-relapse-date{ width:100px; display:inline-block;}
+.ns-relapse-selectdate{ 
+    width:160px; 
+    display:inline-block;
+     @extend .ns-relapse-selectBox;
+    }
+.ns-relapse-update{ width: 50px; display:inline-block;}
+.ns-relapse-confirmed{ width: 100px; display:inline-block;margin-left: 51px; }
+.ns-relapse-checkboxY{ width: 20px; display:inline-block; margin-left: 86px; text-align: center;}
+.ns-relapse-checkboxN{ width: 20px; display:inline-block; margin-left: 20px; text-align: center;}
+
+.ns-relapse-date-lebel{ width:100px; display:inline-block; margin-left: 50px;}
+.ns-relapse-month, .ns-relapse-year{ 
+    width:80px; 
+    display:inline-block;
+    text-align:right;
+    }
+    .leftMargin
+    {
+        margin-left:15%;
+    }

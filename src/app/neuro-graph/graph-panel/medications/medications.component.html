@@ -1,0 +1,240 @@
+<div class="icon-button" (click)="enlargeMedicationPanel();">
+    <i *ngIf="!enlarge" class="fa fa-angle-double-up"></i>
+    <i *ngIf="enlarge" class="fa fa-angle-double-down"></i>
+</div>
+<svg attr.id={{medType.vitaminD}} [style.width.px]="chartsWidth" height="0" [style.marginLeft.px]="graphDimension.marginLeft"
+    style="display:none;overflow:hidden;"></svg>
+<svg attr.id={{medType.dmt}} [style.width.px]="chartsWidth" height="0" [style.marginLeft.px]="graphDimension.marginLeft"
+    style="display:none;overflow:hidden;"></svg>
+<svg attr.id={{medType.otherMeds}} [style.width.px]="chartsWidth" height="0" [style.marginLeft.px]="graphDimension.marginLeft"
+    style="display:none;overflow:hidden;"></svg>
+
+<ng-template #secondLevelOptions>
+  <div class="modal-header draggable" (mousedown)="registerDrag($event)">
+    <h4 class="modal-title">{{optionsData.source.medication.simpleGenericName[0]}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="dialogRef.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-body">
+      <div class="dmt-container">
+        <div class="ns-dmt-row">
+          <div class="ns-dmt-col">
+            <button md-button (click)="optionsClick(optionsData.source)">Name :
+              {{optionsData.source.medication.name}}</button>
+          </div>
+        </div>
+        <div class="ns-dmt-row" *ngFor="let target of optionsData.targets">
+          <div class="ns-dmt-col">
+            <button md-button (click)="optionsClick(target)">Name : {{target.medication.name}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #dmtSecondLevelTemplate>
+    <div class="modal-header draggable" (mousedown)="registerDrag($event)">
+        <h4 class="modal-title" [attr.data-medicationId]="medSecondLayerModel.orderIdentifier">{{medSecondLayerModel.name}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="dialogRef.close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="dmt-container">
+            <div class="ns-dmt-row">
+                <div class="ns-dmt-col">Generic Name :</div>
+                <div class="ns-dmt-value">{{medSecondLayerModel.simpleGenericName}}</div>
+            </div>
+            <div class="ns-dmt-row">
+                <div class="ns-dmt-col">Ordered :</div>
+                <div class="ns-dmt-value">{{medSecondLayerModel.orderDate}}</div>
+            </div>
+            <div class="ns-dmt-row">
+                <div class="ns-dmt-col">End :</div>
+                <div class="ns-dmt-value">{{medSecondLayerModel.medEnd}}</div>
+            </div>
+            <div class="ns-dmt-row">
+                <div class="ns-dmt-col">Patient Reported Start :</div>
+                <div class="ns-dmt-selectBox-value" *ngIf="medSecondLayerModel.allowEdit">
+                    <md-select placeholder="Month" panelClass="neuro-graph-dropdown ns-dmt-theme" floatPlaceholder="never" [(ngModel)]="medSecondLayerModel.patientReportedStartDateMonth">
+                        <md-option [value]="1">Janaury</md-option>
+                        <md-option [value]="2">February</md-option>
+                        <md-option [value]="3">March</md-option>
+                        <md-option [value]="4">April</md-option>
+                        <md-option [value]="5">May</md-option>
+                        <md-option [value]="6">June</md-option>
+                        <md-option [value]="7">July</md-option>
+                        <md-option [value]="8">August</md-option>
+                        <md-option [value]="9">September</md-option>
+                        <md-option [value]="10">October</md-option>
+                        <md-option [value]="11">November</md-option>
+                        <md-option [value]="12">December</md-option>
+                    </md-select>
+
+                    <md-select placeholder="Year" panelClass="neuro-graph-dropdown ns-dmt-theme" floatPlaceholder="never" [(ngModel)]="medSecondLayerModel.patientReportedStartDateYear">
+                        <md-option *ngFor="let item of medSecondLayerModel.allYears" [value]="item">{{item}}</md-option>
+                    </md-select>
+
+                </div>
+                <div class="ns-dmt-value" *ngIf="!medSecondLayerModel.allowEdit">
+                    <div class="ns-dmt-report-month">{{medSecondLayerModel.patientReportedStartDateMonthName}}</div>
+                    <div class="ns-dmt-report-year">{{medSecondLayerModel.patientReportedStartDateYear}}</div>
+                </div>
+            </div>
+            <div class="ns-dmt-row">
+                <div class="ns-dmt-col">Quantity :</div>
+                <div class="ns-dmt-value">{{medSecondLayerModel.medQuantity}}</div>
+            </div>
+            <div class="ns-dmt-row">
+                <div class="ns-dmt-col">Frequency :</div>
+                <div class="ns-dmt-value">{{medSecondLayerModel.frequency}}</div>
+            </div>
+            <div class="ns-dmt-row">
+                <div class="ns-dmt-col"># of Refills (Ordered/Remaining) :</div>
+                <div class="ns-dmt-value">{{medSecondLayerModel.refillCount || '...'}} / {{medSecondLayerModel.refillRemain || '...'}}</div>
+            </div>
+            <div class="ns-dmt-row">
+                <div class="ns-dmt-col"># of Relapses :</div>
+                <div class="ns-dmt-value">{{noOfRelapses}}</div>
+            </div>
+            <div class="ns-dmt-row">
+                <div class="ns-dmt-col">Reason Stopped :</div>
+                <div class="ns-dmt-selectBox-reason" *ngIf="medSecondLayerModel.allowEdit">
+                    <md-select placeholder="Select" panelClass="neuro-graph-dropdown ns-dmt-theme" floatPlaceholder="never" [(ngModel)]="medSecondLayerModel.reasonStopped">
+                        <md-option value="Side effects">Side effects </md-option>
+                        <md-option value="Insurance">Insurance</md-option>
+                        <md-option value="Cost">Cost</md-option>
+                        <md-option value="Logistics">Logistics</md-option>
+                        <md-option value="Needle fatigue">Needle fatigue</md-option>
+                        <md-option value="Other">Other</md-option>
+                    </md-select>
+                    <span *ngIf="medSecondLayerModel.reasonStopped === 'Other' || medSecondLayerModel.reasonStopped === 'Side effects'">
+                        <md-form-field floatPlaceholder="never">
+                            <input mdInput placeholder="Specify" [(ngModel)]="medSecondLayerModel.otherReason" />
+                        </md-form-field>
+                    </span>
+                </div>
+                <div class="ns-dmt-value" *ngIf="!medSecondLayerModel.allowEdit">
+                    <span class="ns-dmt-model">
+                        {{medSecondLayerModel.reasonStopped}}
+                    </span>
+                    <span class="ns-dmt-model" *ngIf="medSecondLayerModel.reasonStopped === 'Other' || medSecondLayerModel.reasonStopped === 'Side effects'">
+                        {{medSecondLayerModel.otherReason}}
+                    </span>
+                </div>
+            </div>
+            <div class="ns-dmt-row" *ngIf="medSecondLayerModel.allowEdit">
+                <div class="ns-dmt-update">
+                    <button class="call-out-buttons" (click)="updateDmt()">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #vitaminDSecondLevelTemplate>
+    <div class="modal-header draggable" (mousedown)="registerDrag($event)">
+        <h4 class="modal-title" [attr.data-medicationId]="medSecondLayerModel.orderIdentifier">{{medSecondLayerModel.name}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="dialogRef.close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="vitamin-d3-container">
+            <div class="ns-vitamin-d3-row">
+                <div class="ns-vitamin-d3-col">Generic Name :</div>
+                <div class="ns-vitamin-d3-value">{{medSecondLayerModel.simpleGenericName}}</div>
+            </div>
+            <div class="ns-vitamin-d3-row">
+                <div class="ns-vitamin-d3-col">Ordered :</div>
+                <div class="ns-vitamin-d3-value">{{medSecondLayerModel.orderDate}}</div>
+            </div>
+            <div class="ns-vitamin-d3-row">
+                <div class="ns-vitamin-d3-col">End :</div>
+                <div class="ns-vitamin-d3-value">{{medSecondLayerModel.medEnd}}</div>
+            </div>
+            <div class="ns-vitamin-d3-row">
+                <div class="ns-vitamin-d3-col">Patient Reported:</div>
+                <div class="ns-vitamin-d3-value">{{medSecondLayerModel.medEnded}}</div>
+            </div>
+
+            <div class="ns-vitamin-d3-row">
+                <div class="ns-vitamin-d3-text">
+                    Best practices suggest that all patients treated for MS, should be on dosages of Vitamin D.
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #otherMedsSecondLevelTemplate>
+    <div class="modal-header draggable" (mousedown)="registerDrag($event)">
+        <h4 class="modal-title" [attr.data-medicationId]="medSecondLayerModel.orderIdentifier">{{medSecondLayerModel.name}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="dialogRef.close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="other-meds-container">
+            <div class="ns-other-meds-row">
+                <div class="ns-other-meds-col">Generic Name :</div>
+                <div class="ns-other-meds-value">{{medSecondLayerModel.simpleGenericName}}</div>
+            </div>
+            <div class="ns-other-meds-row">
+                <div class="ns-other-meds-col">Ordered :</div>
+                <div class="ns-other-meds-value">{{medSecondLayerModel.orderDate}}</div>
+            </div>
+            <div class="ns-other-meds-row">
+                <div class="ns-other-meds-col">End :</div>
+                <div class="ns-other-meds-value">{{medSecondLayerModel.medEnd}}</div>
+            </div>
+            <div class="ns-other-meds-row">
+                <div class="ns-other-meds-col">Quantity :</div>
+                <div class="ns-other-meds-value">{{medSecondLayerModel.medQuantity}}</div>
+            </div>
+            <div class="ns-other-meds-row">
+                <div class="ns-other-meds-col">Frequency :</div>
+                <div class="ns-other-meds-value">{{medSecondLayerModel.frequency}}</div>
+            </div>
+            <div class="ns-other-meds-row">
+                <div class="ns-other-meds-col"># of Refills (Ordered/Remaining) :</div>
+                <div class="ns-other-meds-value">{{medSecondLayerModel.refillCount || '...'}} / {{medSecondLayerModel.refillRemain || '...'}}</div>
+            </div>
+            <div class="ns-other-meds-row">
+                <div class="ns-other-meds-col">Reason for Med :</div>
+                <div class="ns-other-meds-selectBox" *ngIf="medSecondLayerModel.allowEdit">
+                    <md-select placeholder="Select" panelClass="neuro-graph-dropdown ns-dmt-theme" floatPlaceholder="never" [(ngModel)]="medSecondLayerModel.reasonForMed">
+                        <md-option value="Thinking/Memory/Cognition">Thinking/Memory/Cognition </md-option>
+                        <md-option value="Fatigue">Fatigue</md-option>
+                        <md-option value="Vision">Vision</md-option>
+                        <md-option value="Speech">Speech</md-option>
+                        <md-option value="Swallow">Swallow</md-option>
+                        <md-option value="Arm Use">Arm Use</md-option>
+                        <md-option value="Leg Use">Leg Use</md-option>
+                        <md-option value="Walking/Coordination (mobility)">Walking/Coordination (mobility)</md-option>
+                        <md-option value="Balance">Balance</md-option>
+                        <md-option value="Tingling/Numbness (sensory)">Tingling/Numbness (sensory)</md-option>
+                        <md-option value="Pain">Pain</md-option>
+                        <md-option value="Bowel">Bowel</md-option>
+                        <md-option value="Bladder">Bladder</md-option>
+                        <md-option value="Sexual">Sexual</md-option>
+                        <md-option value="Depression/Emotion (mood)">Depression/Emotion (mood)</md-option>
+                        <md-option value="Sleep">Sleep</md-option>
+                        <md-option value="Quality of Life">Quality of Life</md-option>
+                    </md-select>
+                </div>
+                <div class="ns-other-meds-value" *ngIf="!medSecondLayerModel.allowEdit">
+                    <span class="ns-other-meds-model">{{medSecondLayerModel.reasonForMed}}</span>
+                </div>
+            </div>
+            <div class="ns-other-meds-row" *ngIf="medSecondLayerModel.allowEdit">
+                <div class="ns-other-meds-update">
+                    <button class="call-out-buttons" (click)="updateOtherMeds()">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

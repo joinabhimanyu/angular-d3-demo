@@ -1,0 +1,217 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+@import 'neuro-graph.colorpalette.scss';
+
+$ns-edss-primary: mat-palette($ns-edss-base-color, 500);
+$ns-edss-accent: mat-palette($ns-edss-base-color, 500);
+$ns-edss-warn: mat-palette($ns-edss-base-color, 900);
+$ns-edss-theme: mat-light-theme($ns-edss-primary, $ns-edss-accent, $ns-edss-warn);
+
+$ns-walk-primary: mat-palette($ns-walk-base-color, 500);
+$ns-walk-accent: mat-palette($ns-walk-base-color, 500);
+$ns-walk-warn: mat-palette($ns-walk-base-color, 900);
+$ns-walk-theme: mat-light-theme($ns-walk-primary, $ns-walk-accent, $ns-walk-warn);
+
+$ns-relapses-primary: mat-palette($ns-relapses-base-color, 500);
+$ns-relapses-accent: mat-palette($ns-relapses-base-color, 500);
+$ns-relapses-warn: mat-palette($ns-relapses-base-color, 900);
+$ns-relapses-theme: mat-light-theme($ns-relapses-primary, $ns-relapses-accent, $ns-relapses-warn);
+
+$ns-images-primary: mat-palette($ns-images-base-color, 500);
+$ns-images-accent: mat-palette($ns-images-base-color, 500);
+$ns-images-warn: mat-palette($ns-images-base-color, 900);
+$ns-images-theme: mat-light-theme($ns-images-primary, $ns-images-accent, $ns-images-warn);
+
+$ns-referrals-primary: mat-palette($ns-referrals-base-color, 500);
+$ns-referrals-accent: mat-palette($ns-referrals-base-color, 500);
+$ns-referrals-warn: mat-palette($ns-referrals-base-color, 900);
+$ns-referrals-theme: mat-light-theme($ns-referrals-primary, $ns-referrals-accent, $ns-referrals-warn);
+
+$ns-vaccinations-primary: mat-palette($ns-vaccinations-base-color, 500);
+$ns-vaccinations-accent: mat-palette($ns-vaccinations-base-color, 500);
+$ns-vaccinations-warn: mat-palette($ns-vaccinations-base-color, 900);
+$ns-vaccinations-theme: mat-light-theme($ns-vaccinations-primary, $ns-vaccinations-accent, $ns-vaccinations-warn);
+
+$ns-labs-primary: mat-palette($ns-labs-base-color, 500);
+$ns-labs-accent: mat-palette($ns-labs-base-color, 500);
+$ns-labs-warn: mat-palette($ns-labs-base-color, 900);
+$ns-labs-theme: mat-light-theme($ns-labs-primary, $ns-labs-accent, $ns-labs-warn);
+
+$ns-symptoms-primary: mat-palette($ns-symptoms-base-color, 500);
+$ns-symptoms-accent: mat-palette($ns-symptoms-base-color, 500);
+$ns-symptoms-warn: mat-palette($ns-symptoms-base-color, 900);
+$ns-symptoms-theme: mat-light-theme($ns-symptoms-primary, $ns-symptoms-accent, $ns-symptoms-warn);
+
+
+$ns-dme-primary: mat-palette($ns-dme-base-color, 500);
+$ns-dme-accent: mat-palette($ns-dme-base-color, 500);
+$ns-dme-warn: mat-palette($ns-dme-base-color, 900);
+$ns-dme-theme: mat-light-theme($ns-dme-primary, $ns-dme-accent, $ns-dme-warn);
+
+$ns-dmt-primary: mat-palette($ns-dmt-base-color, 500);
+$ns-dmt-accent: mat-palette($ns-dmt-base-color, 500);
+$ns-dmt-warn: mat-palette($ns-dmt-base-color, 900);
+$ns-dmt-theme: mat-light-theme($ns-dmt-primary, $ns-dmt-accent, $ns-dmt-warn);
+
+$ns-othermeds-primary: mat-palette($ns-othermeds-base-color, 500);
+$ns-othermeds-accent: mat-palette($ns-othermeds-base-color, 500);
+$ns-othermeds-warn: mat-palette($ns-othermeds-base-color, 900);
+$ns-othermeds-theme: mat-light-theme($ns-othermeds-primary, $ns-othermeds-accent, $ns-othermeds-warn);
+
+$ns-vitaminD-primary: mat-palette($ns-vitaminD-base-color, 500);
+$ns-vitaminD-accent: mat-palette($ns-vitaminD-base-color, 500);
+$ns-vitaminD-warn: mat-palette($ns-vitaminD-base-color, 900);
+$ns-vitaminD-theme: mat-light-theme($ns-vitaminD-primary, $ns-vitaminD-accent, $ns-vitaminD-warn);
+
+$ns-encounters-primary: mat-palette($ns-encounters-base-color, 500);
+$ns-encounters-accent: mat-palette($ns-encounters-base-color, 500);
+$ns-encounters-warn: mat-palette($ns-encounters-base-color, 900);
+$ns-encounters-theme: mat-light-theme($ns-encounters-primary, $ns-encounters-accent, $ns-encounters-warn);
+
+
+$ns-default-primary: mat-palette($ns-default, 500);
+$ns-default-accent: mat-palette($ns-default, 500);
+$ns-default-warn: mat-palette($ns-default, 900);
+$ns-default-theme: mat-light-theme($ns-default-primary, $ns-default-accent, $ns-default-warn);
+
+
+@mixin applyCustomStyles($theme) {
+  .mat-dialog-container {
+    padding: 0px;
+    border: solid 1px mat-color($theme);
+  }
+
+  .modal-header {
+    border-bottom: 1px solid #bfbfbf;
+    padding: 2px 10px;
+
+    .modal-title {
+      float: left;
+      margin: 0px;
+      font-size: 10pt;
+      font-weight: 700;
+      line-height: 19px;
+      color: mat-color($theme);
+    }
+
+    .close {
+      float: right;
+      font-size: 12pt;
+      color: #bfbfbf;
+      background-color: transparent;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      padding: 0px;
+    }
+  }
+
+  .modal-header:after {
+    clear: both;
+    content: '';
+    display: block;
+  }
+
+  .modal-body {
+    font-size: 10pt;
+
+    .call-out-buttons {
+      font-size: 10pt;
+    }
+  }
+
+  .mat-option.mat-selected {
+    border-bottom: solid 1px mat-color($theme) !important;
+  }
+
+  .mat-select-trigger {
+    background-color: #ececec;
+
+    .mat-select-underline {
+      background-color: mat-color($theme);
+    }
+
+    .mat-select-arrow {
+      color: mat-color($theme);
+    }
+  }
+
+  .call-out-buttons {
+    border: solid 1px mat-color($theme);
+  }
+
+  .mat-option.mat-selected {
+    border-bottom: solid 1px mat-color($theme) !important;
+    color: mat-color($theme) !important;
+  }
+}
+
+@include angular-material-theme($ns-default-theme);
+
+.ns-edss-theme {
+  @include angular-material-theme($ns-edss-theme);
+  @include applyCustomStyles($ns-edss-accent);
+
+}
+
+.ns-25walk-theme {
+  @include angular-material-theme($ns-walk-theme);
+  @include applyCustomStyles($ns-walk-accent);
+}
+
+.ns-relapses-theme {
+  @include angular-material-theme($ns-relapses-theme);
+  @include applyCustomStyles($ns-relapses-accent);
+}
+
+.ns-images-theme {
+  @include angular-material-theme($ns-images-theme);
+  @include applyCustomStyles($ns-images-accent);
+}
+
+.ns-referrals-theme {
+  @include angular-material-theme($ns-referrals-theme);
+  @include applyCustomStyles($ns-referrals-accent);
+}
+
+.ns-vaccinations-theme {
+  @include angular-material-theme($ns-vaccinations-theme);
+  @include applyCustomStyles($ns-vaccinations-accent);
+}
+
+.ns-labs-theme {
+  @include angular-material-theme($ns-labs-theme);
+  @include applyCustomStyles($ns-labs-accent);
+}
+
+.ns-symptoms-theme {
+  @include angular-material-theme($ns-symptoms-theme);
+  @include applyCustomStyles($ns-symptoms-accent);
+}
+
+.ns-dme-theme {
+  @include angular-material-theme($ns-dme-theme);
+  @include applyCustomStyles($ns-dme-accent);
+}
+
+.ns-dmt-theme {
+  @include angular-material-theme($ns-dmt-theme);
+  @include applyCustomStyles($ns-dmt-accent);
+}
+
+.ns-othermeds-theme {
+  @include angular-material-theme($ns-othermeds-theme);
+  @include applyCustomStyles($ns-othermeds-accent);
+}
+
+.ns-vitaminD-theme {
+  @include angular-material-theme($ns-vitaminD-theme);
+  @include applyCustomStyles($ns-vitaminD-accent);
+}
+
+.ns-encounters-theme {
+  @include angular-material-theme($ns-encounters-theme);
+  @include applyCustomStyles($ns-encounters-accent);
+}

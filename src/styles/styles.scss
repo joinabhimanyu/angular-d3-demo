@@ -1,0 +1,180 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'skin';
+@import 'tables';
+@import 'panels';
+
+html {
+    font-family: $main-font;
+}
+
+.hidden{
+    display: none;
+}
+.text-center{
+    text-align: center;
+}
+//Material Overrides
+md-sidenav-container {
+    background:  #F2F2F2;
+    min-height: 100%;
+    width: 100%;
+    position: fixed !important;
+    left: 0;
+    top: 0;
+}
+
+.md-sidenav {
+    background: $dark-bg;
+    color: $light-primary-color;
+    width: 60px;
+}
+.md-toolbar{
+    background: $primary-color;
+    color: $white;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 0 16px;
+    align-items: center;
+    height: 64px;
+}
+//Helper classes
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.uppercase-text {
+    text-transform: uppercase;
+}
+
+.p-c-container {
+    margin-right: 1em;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.bold {
+    font-weight: bold;
+}
+.primary-text{
+    color: $primary-color;
+}
+
+.no-mar-top{
+    margin-top: 0 !important;
+}
+
+.pc-container .mat-select-placeholder.mat-floating-placeholder {
+    opacity: 0 !important;
+}
+
+.push-to-avs,
+.push-to-pn {
+    border: 1px solid #f15a24;
+    border-radius: 5px;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    i {
+        font-size: 2rem;
+        text-align: center;
+        width: 100%;
+        margin: auto;
+        padding-left: 3px;
+        color: #aaaaaa;
+    }
+}
+
+.push-to-avs:hover,
+.push-to-pn:hover{
+    box-shadow: 2px 2px 6px darkgrey;
+}
+
+.graph-panel,
+.right-panel {
+    width: auto !important;
+}
+
+.graph-panel,
+.right-panel,
+.neuro-related  {
+    flex: 0 0 auto;
+
+}
+
+.neuro-related {
+    min-width: 12rem !important;
+    width: 16rem !important;
+
+}
+
+.right-panel {
+    min-width: 19% !important;
+}
+
+.graph-panel {
+    min-width: 47rem !important
+}
+.age-onset {
+    border-bottom: 1px solid white !important;
+    height: 24px;
+ }
+ 
+ .age-onset:disabled {
+    border-bottom: none !important;
+    cursor: not-allowed !important;
+ }
+
+ md-input-container .mat-input-wrapper .mat-input-underline{
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.main-container {
+    height: 100%;
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+.demographic-data {
+        display: -ms-flexbox !important;
+        -ms-flex-direction: row !important;
+        -ms-flex-align: start !important;
+        max-width: 84% !important;
+        .title {
+            margin-bottom: 0px !important;
+        }
+    }
+.mat-input-flex .mat-input-infix {
+    margin-bottom: 0px;
+}
+
+md-input-container .mat-input-wrapper .mat-input-underline{
+    bottom: 6px !important;
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.user-data {
+    display: block !important
+}
+
+}
+
+md-tooltip-component .ms-type-tooltip{
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.border-buttons{
+    display: none;
+}
+
+.overview-card > button:nth-child(2) {
+    display: none;
+}
+
+nav-bar > div > ul.menu-top > li:nth-child(2){
+    display: none;
+}

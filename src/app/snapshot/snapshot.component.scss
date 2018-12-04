@@ -1,0 +1,114 @@
+@import "../../styles/skin";
+.overview-card {
+  margin: 10px;
+  min-height: 250px;
+  box-shadow: none;
+} 
+  
+.title {
+ color: $warn-color;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.subtitle {
+  display: block;
+  font-weight: normal;
+  color: $light-gray-color;
+  font-size: 18px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.info-card {
+  background: $white-gray-color;
+  color: $warn-color;
+  &:not(:first-child) {
+    margin-top: 30px;
+  }
+
+  .card-title {
+    padding-top: 10px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  .card-main {
+    position: relative;
+    .card-icon {
+      font-size: 47px;
+      color: $light-gray-color;
+      margin-left: 10px
+    }
+
+    .column {
+        span {
+            display: block;
+        }
+    }
+                
+    .big-number {
+        font-size: 70px;
+        font-weight: bold;
+        position: absolute;
+        right: 10px;
+        bottom: 0;
+        &.danger {
+          color: red;
+        }
+    }
+
+    .single-word {
+        position: absolute;
+        bottom: 0;
+        right: 10px;
+        font-size: 16px;
+        margin: 0;
+        margin-bottom: 10px;
+        font-weight: bold;
+        text-align: right;
+    }
+  }
+    
+  .card-extra {
+    text-align: right;
+    margin-top: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    min-height: 13px;
+  }
+
+  .progress-note-card {
+  border: 2px solid $warn-color;
+    .progress-note-content {
+      margin-left: 19px;
+      margin-top: 15px;
+      margin-right: 19px;
+      margin-bottom: 28px;
+    }
+    
+    h4 {
+      font-size: 16px;        
+      margin-left: 19px;
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+
+  }
+}
+  
+.patient-concerns-container {
+    margin-right: 10px;
+    background: white;
+    margin-top: 10px;
+} 
+
+.graph-neuro {
+  width: 100%;
+  display: flex;
+  overflow-x: scroll;
+  height: 92vh;
+  overflow-y: scroll;
+}

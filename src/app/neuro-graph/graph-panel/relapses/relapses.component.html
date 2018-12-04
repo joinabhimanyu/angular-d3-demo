@@ -1,0 +1,116 @@
+<ng-template #relapsesSecondLevelTemplate>
+    <div class="modal-header draggable" (mousedown)="registerDrag($event)">
+        <h4 class="modal-title">Relapse</h4>
+        <button type="button" class="close" aria-label="Close" (click)="dialog.closeAll()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="relapse-container">
+            <div class="ns-relapse-row">
+                <div class="ns-relapse-date-lebel">Date</div>
+                <div class="ns-relapse-month">{{relapsesDetail.month}}</div>
+                <div class="ns-relapse-year">{{relapsesDetail.year}}</div>
+            </div>
+            <div class="ns-relapse-row">
+                <div class="ns-relapse-confirmed">Clinician
+                    <br/> Confirmed</div>
+                <div class="ns-relapse-checkboxY"> Y
+                    <md-checkbox disabled [checked]="relapsesDetail.confirm"></md-checkbox>
+                </div>
+                <div class="ns-relapse-checkboxN"> N
+                    <md-checkbox disabled [checked]="!relapsesDetail.confirm"></md-checkbox>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</ng-template>
+<ng-template #relapsesEditSecondLevelTemplate>
+    <div class="modal-header draggable" (mousedown)="registerDrag($event)">
+        <h4 class="modal-title">Relapse</h4>
+        <button type="button" class="close" aria-label="Close" (click)="dialog.closeAll()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="relapse-container">
+            <div class="ns-relapse-row">
+                <div class="ns-relapse-close">
+                    <button md-icon-button (click)="deleteRelapse()">
+                        <md-icon class="material-icons alignImg">clear</md-icon>
+                    </button>
+                </div>
+                <div class="ns-relapse-date">Date</div>
+                <div class="ns-relapse-selectdate">
+
+                    <md-select panelClass="neuro-graph-dropdown ns-relapses-theme" placeholder="Month" [(ngModel)]="relapsesDetail.month" (change)="valChng()"
+                        floatPlaceholder="never">
+                        <md-option *ngFor="let mnth of month" [value]="mnth">{{mnth}}</md-option>
+                    </md-select>
+
+                    <md-select panelClass="neuro-graph-dropdown ns-relapses-theme" placeholder="Year" [(ngModel)]="relapsesDetail.year" (change)="valChng()"
+                        floatPlaceholder="never">
+                        <md-option *ngFor="let year of years" [value]="year">{{year}}</md-option>
+                    </md-select>
+                  
+                </div>
+                <div class="ns-relapse-update" *ngIf="isEditSelected">
+                    <button class="call-out-buttons" (click)="updateRelapse()">Update</button>
+                    
+                </div>
+                <md-error class="ng-error leftMargin" *ngIf="isDateOutOfRange == true">
+                    Relapse Date should be less than current date
+                </md-error>
+            </div>
+            <div class="ns-relapse-row">
+                <div class="ns-relapse-confirmed">Clinician Confirmed</div>
+                <div class="ns-relapse-checkboxY"> Y
+                    <md-checkbox (change)="checkChge()" [checked]="relapsesDetail.confirm"></md-checkbox>
+                </div>
+                <div class="ns-relapse-checkboxN"> N
+                    <md-checkbox (change)="checkChge()" [checked]="!relapsesDetail.confirm"></md-checkbox>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</ng-template>
+<ng-template #relapsesAddSecondLevelTemplate>
+    <div class="modal-header">
+        <h4 class="modal-title">Add Relapse</h4>
+        <button type="button" class="close" aria-label="Close" (click)="dialog.closeAll()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="relapse-container">
+            <div class="ns-relapse-row">
+
+                <div class="ns-relapse-col">Reported Relapse</div>
+                <div class="ns-relapse-value">
+
+                    <md-select placeholder="Month" panelClass="neuro-graph-dropdown ns-relapses-theme" [(ngModel)]="relapsesDetail.month" floatPlaceholder="never" (change)="addChng()">
+                        <md-option *ngFor="let mnth of month" [value]="mnth">{{mnth}}</md-option>
+                    </md-select>
+
+                    <md-select placeholder="Year" panelClass="neuro-graph-dropdown ns-relapses-theme" [(ngModel)]="relapsesDetail.year" floatPlaceholder="never" (change)="addChng()">
+                        <md-option *ngFor="let year of years" [value]="year">{{year}}</md-option>
+                    </md-select>
+                </div>
+                <md-error class="ng-error leftMargin" *ngIf="isDateOutOfRange == true">
+                    Relapse Date should be less than current date
+                </md-error>
+            </div>
+            <div class="ns-relapse-row">
+
+                <div class="right-float">
+                    <button class="call-out-buttons" (click)="addRelapse()">Add</button>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</ng-template>

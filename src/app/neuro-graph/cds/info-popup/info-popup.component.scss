@@ -1,0 +1,38 @@
+@import '../../common.scss';
+
+.cds-info-popup .mat-dialog-container{
+    padding: 0px;
+}
+.cds-header{
+    border-bottom: 1px solid #bfbfbf;
+    padding: 7px 15px 5px 15px;
+    height: 38px;
+    line-height: 38px;
+    font-weight: 700;
+    color: #7e7e7e;
+    font-size: 14pt;
+}
+.cds-header-title{ float: left;}
+.cds-header-close{ float: right; cursor: pointer;}
+.cds-header-close i{ font-size: 10pt; cursor: pointer;}
+.cds-header:after, .urlContainer:after {
+    clear: both;
+    content: '';
+    display: block;
+}
+.cds-content, .urlContainer{
+    padding: 10px 15px 15px 15px;
+}
+.urlContainer{
+
+    a{
+        text-decoration: underline; color: #333333; outline: none;
+    }
+    .pull-left{
+        float: left;
+
+    }
+    .pull-right{
+        float: right;
+        }
+}
